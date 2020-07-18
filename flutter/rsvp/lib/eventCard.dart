@@ -26,7 +26,7 @@ class EventCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                event.eventName,
+                event.name,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.grey[600],
@@ -36,7 +36,7 @@ class EventCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Text(
-                    event.eventDate,
+                    event.date,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[800],
