@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/pages/home.dart';
 import 'package:rsvp/pages/createEvent.dart';
 import 'package:rsvp/pages/eventDetails.dart';
+import 'package:rsvp/pages/loading.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/home',
+    initialRoute: '/loading',
     routes: {
+      '/loading': (context) => Loading(),
       '/home': (context) => Home(),
       '/CreateEvent': (context) => CreateEvent(),
       '/FullEventInfo': (context) => EventDetails(),

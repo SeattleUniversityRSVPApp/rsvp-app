@@ -28,14 +28,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Event> events = [
-    Event('Walk with dogs', '07/20/2020'),
-    Event('Visit Museum', '08/31/2020'),
+    Event('Walk with dogs', '08/16/2020'),
+    Event('Finish this project', '09/08/2020'),
+    Event('Visit Museum', '10/28/2020'),
+    Event('Find internship', '11/17/2020'),
     Event('Party Night', '12/31/2020')
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       drawer: Container(
         child: NavDrawer(),
         width: 235,
@@ -45,20 +48,33 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         backgroundColor: Colors.grey[800],
       ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: events
-              .map((event) => EventCard(
-                  event: event,
-                  delete: () {
-                    setState(() {
-                      events.remove(event);
-                    });
-                  }))
-              .toList(),
-        ),
+      body: ListView.builder(
+        itemCount: events.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+            child: Card(
+              child: ListTile(
+                title: Text(events[index].name),
+                subtitle: Text(events[index].date),
+                trailing: Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>
+                      EventCard(event: events[index], delete: () {
+                        setState(() {
+                          events.remove(events[index]);
+                        });
+                      },
+                    )
+                  ));
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }
+
 }
