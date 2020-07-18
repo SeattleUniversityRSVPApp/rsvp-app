@@ -28,12 +28,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Event> events = [
-    Event(eventName: 'Walk with dogs',
-        eventDate: '07/20/2020'),
-    Event(eventName: 'Visit Museum',
-        eventDate: '08/31/2020'),
-    Event(eventName: 'Party Night',
-        eventDate: '12/31/2020')
+    Event('Walk with dogs', '07/20/2020'),
+    Event('Visit Museum', '08/31/2020'),
+    Event('Party Night', '12/31/2020')
   ];
 
   @override
@@ -51,15 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: events.map((event) =>
-            EventCard(
-              event: event,
-              delete: () {
-                setState(() {
-                  events.remove(event);
-                });
-              }
-            )).toList(),
+          children: events
+              .map((event) => EventCard(
+                  event: event,
+                  delete: () {
+                    setState(() {
+                      events.remove(event);
+                    });
+                  }))
+              .toList(),
         ),
       ),
     );
