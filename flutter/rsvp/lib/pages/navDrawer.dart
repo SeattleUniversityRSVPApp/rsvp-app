@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rsvp/pages/createEvent.dart';
+import 'package:rsvp/pages/joinEvent.dart';
+import 'package:rsvp/pages/setting.dart';
+
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -35,17 +39,29 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.add),
             title: Text('Create Event'),
-            onTap: () => {},
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => CreateEvent())
+              )
+            },
           ),
           ListTile(
             leading: Icon(Icons.person_add),
             title: Text('Join Event'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => JoinEvent())
+              )
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Setting'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Setting())
+              )
+            },
           ),
         ],
       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CreateEvent extends StatelessWidget {
+class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create an Event'),
+        title: Text('Setting'),
       ),
       body: Text('test'),
     );
