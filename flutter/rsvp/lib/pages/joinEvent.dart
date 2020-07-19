@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CreateEvent extends StatelessWidget {
+class JoinEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create an Event'),
+        title: Text('Join in an Event'),
       ),
       body: Text('test'),
     );
