@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Event('Finish this project', '09/08/2020'),
     Event('Visit Museum', '10/28/2020'),
     Event('Find internship', '11/17/2020'),
-    Event('Party Night', '12/31/2020')
+    Event('Party Night', '12/31/2020'),
   ];
 
   @override
