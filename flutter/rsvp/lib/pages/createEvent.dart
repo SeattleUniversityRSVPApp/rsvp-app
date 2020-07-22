@@ -7,7 +7,7 @@ class CreateEvent extends StatelessWidget {
       appBar: AppBar(
         title: Text('Create an Event'),
       ),
-      body: Text('test'),
+      body: Text('This is the page to create an event'),
     );
   }
 }
