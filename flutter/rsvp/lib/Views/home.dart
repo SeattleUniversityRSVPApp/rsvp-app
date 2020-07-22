@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rsvp/pages/navDrawer.dart';
-import 'package:rsvp/pages/eventDetails.dart';
+import 'package:rsvp/Views/navDrawer.dart';
+import 'package:rsvp/Views/eventDetails.dart';
 import 'package:rsvp/event.dart';
 
 class Home extends StatefulWidget {
