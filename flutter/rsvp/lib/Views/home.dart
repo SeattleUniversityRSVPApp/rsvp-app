@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rsvp/Views/navDrawer.dart';
 import 'package:rsvp/Views/eventDetails.dart';
-import 'package:rsvp/event.dart';
+import 'package:rsvp/Models/event.dart';
 
 class Home extends StatefulWidget {
   @override

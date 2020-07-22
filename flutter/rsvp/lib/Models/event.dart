@@ -2,6 +2,8 @@ class Event {
   String _name;
   String _date;
 
+  Event(this._name, this._date);
+
   String get name => _name;
 
   set name(String value) {
@@ -14,5 +16,4 @@ class Event {
     _date = value;
   }
 
-  Event(this._name, this._date);
 }
