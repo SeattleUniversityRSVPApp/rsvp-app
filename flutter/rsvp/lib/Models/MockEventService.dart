@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:rsvp/models/IEventWebServcie.dart';
+import 'package:rsvp/Models/IEventWebServcie.dart';
 
 import 'event.dart';
 
