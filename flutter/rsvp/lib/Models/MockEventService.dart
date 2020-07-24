@@ -17,12 +17,17 @@ class MockEventService implements IEventWebService {
     var event6 = Event('Party Night', '12/31/2020');
 
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event1;
+    _eventIdCounter++;
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event2;
+    _eventIdCounter++;
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event3;
+    _eventIdCounter++;
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event4;
+    _eventIdCounter++;
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event5;
+    _eventIdCounter++;
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event6;
-    _eventIdCounter += 6;
+    _eventIdCounter++;
   }
 
   @override
