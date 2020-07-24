@@ -1,20 +1,23 @@
-import 'dart:collection';
-
 import 'package:rsvp/Models/IEventWebServcie.dart';
 
 import 'event.dart';
 
 class MockEventService implements IEventWebService {
-  Map<String, Event> _mockEventTable = <String, Event>{};
+  final Map<String, Event> _mockEventTable = <String, Event>{};
   int _eventIdCounter = 0;
+  final _urlTemplate = 'https://www.my-test-unique-url-';
 
   MockEventService() {
-    //Add some events:
-    Event _event1;
-    Event _event2;
-    Event _event3;
-    Event _event4;
-    //Add _event1, _event2, _event3, _event4
+    //Add some events in the mock table:
+    var event1 = Event('Basketball Game', '08/29/2020');
+//    var event2 = Event();
+//    var event3 = Event();
+//    var event4 = Event();
+//    var event5 = Event();
+
+    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event1;
+    _eventIdCounter++;
+//    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event2;
   }
 
   @override
@@ -24,7 +27,7 @@ class MockEventService implements IEventWebService {
 
   @override
   Event getEvent(String link) {
-    return null;
+    return _mockEventTable[link];
   }
 
   @override
