@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rsvp/event.dart';
+import 'package:rsvp/Models/event.dart';
 
-class EventCard extends StatelessWidget {
-
+class EventDetails extends StatelessWidget {
   final Event event;
   final Function delete;
-  EventCard({this.event, this.delete});
+  EventDetails({this.event, this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +14,13 @@ class EventCard extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey[800],
           centerTitle: true,
-            title: Text(
-              event.name,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
+          title: Text(
+            event.name,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
             ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(20,8,12,8),
@@ -59,3 +58,4 @@ class EventCard extends StatelessWidget {
     );
   }
 }
+

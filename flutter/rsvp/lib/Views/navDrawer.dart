@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rsvp/pages/createEvent.dart';
-import 'package:rsvp/pages/joinEvent.dart';
-import 'package:rsvp/pages/setting.dart';
+import 'package:rsvp/Views/createEvent.dart';
+import 'package:rsvp/Views/joinEvent.dart';
+import 'package:rsvp/Views/setting.dart';
 
 
 class NavDrawer extends StatelessWidget {

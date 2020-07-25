@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rsvp/pages/home.dart';
-import 'package:rsvp/pages/createEvent.dart';
-import 'package:rsvp/pages/eventDetails.dart';
-import 'package:rsvp/pages/loading.dart';
-import 'package:rsvp/pages/joinEvent.dart';
+import 'package:rsvp/Views/home.dart';
+import 'package:rsvp/Views/createEvent.dart';
+import 'package:rsvp/Views/eventDetails.dart';
+import 'package:rsvp/Views/loading.dart';
+import 'package:rsvp/Views/joinEvent.dart';
 
 void main() {
   runApp(MaterialApp(

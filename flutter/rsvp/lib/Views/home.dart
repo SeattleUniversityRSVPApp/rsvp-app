@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rsvp/pages/navDrawer.dart';
-import 'package:rsvp/event.dart';
-import 'package:rsvp/eventCard.dart';
+import 'package:rsvp/Views/navDrawer.dart';
+import 'package:rsvp/Views/eventDetails.dart';
+import 'package:rsvp/Models/event.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) =>
-                      EventCard(event: events[index], delete: () {
+                      EventDetails(event: events[index], delete: () {
                         setState(() {
                           events.remove(events[index]);
                         });
