@@ -11,12 +11,12 @@ class Event {
 
   Event(this._name, this._date); // Remove Later
 
-  Event_Constructor(String link, String name, String creator, String description, String date, String location, int minNum, bool status) {
+  Event_Constructor(String link, String name, String creator, String description, DateTime dateTime, String location, int minNum, bool status) {
     _link = link;
     _name = name;
     _creator = creator;
     _description = description;
-    _date = date;
+    _dateTime = dateTime;
     _location = location;
     _minNum = minNum;
     _status = status;
