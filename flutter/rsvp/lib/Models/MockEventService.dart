@@ -3,12 +3,20 @@ import 'package:rsvp/Models/IEventWebServcie.dart';
 import 'event.dart';
 
 class MockEventService implements IEventWebService {
+  static final MockEventService _webServiceSingleton =
+      MockEventService._internal();
+
   final Map<String, Event> _mockEventTable = <String, Event>{};
   int _eventIdCounter = 0;
   final _urlTemplate = 'https://www.my-test-unique-url-';
 
-  MockEventService() {
-    //Add some events in the mock table:
+  factory MockEventService() {
+    return _webServiceSingleton;
+  }
+
+  MockEventService._internal() {
+    // Initialization logic is here:
+    // Add some events in the mock table:
     var event1 = Event('Basketball Game', '08/03/2020');
     var event2 = Event('Walk with dogs', '08/16/2020');
     var event3 = Event('Finish this project', '09/08/2020');
@@ -31,8 +39,9 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  bool createEvent() {
-    return false;
+  Event createEvent(String eventName, String eventDate, int minNum,
+      String eventDescription, String eventLocation) {
+    return null;
   }
 
   @override
