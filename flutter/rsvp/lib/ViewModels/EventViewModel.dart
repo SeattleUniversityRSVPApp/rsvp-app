@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class EventViewModel {
   Event _event;
 
-//the page viemodel gets events from repository and generate one eventViewModel for each event
+  //the page viemodel gets events from repository and generate one eventViewModel for each event
   EventViewModel(this._event);
 
   String get link => _event.link;
