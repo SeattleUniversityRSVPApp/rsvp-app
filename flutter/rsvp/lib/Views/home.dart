@@ -9,31 +9,41 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Map rcvdData = {};
+
   @override
   Widget build(BuildContext context) {
+    rcvdData = (rcvdData.isNotEmpty ? rcvdData : ModalRoute.of(context).settings.arguments) as Map;
+
     return MaterialApp(
       title: 'Flutter Demo',
       /*theme: ThemeData(
         primarySwatch: Colors.grey,
       ),*/
-      home: MyHomePage(),
+      home: MyHomePage(rcvdData['eventList']),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  var events;
+
+  MyHomePage(this.events);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(events as List<Event>);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Event> events = [
+  List<Event> events;   /*[
     Event('Walk with dogs', '08/16/2020'),
     Event('Finish this project', '09/08/2020'),
     Event('Visit Museum', '10/28/2020'),
     Event('Find internship', '11/17/2020'),
     Event('Party Night', '12/31/2020'),
-  ];
+  ];*/
+
+  _MyHomePageState(this.events);
 
   @override
   Widget build(BuildContext context) {

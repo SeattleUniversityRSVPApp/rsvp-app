@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
+import 'package:rsvp/Models/event.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -10,8 +12,14 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
 
   void setupWorldTime() async {
+    List<Event> eventList;
+    var _MyEventsViewModelObj = MyEventsViewModel();
+
+    eventList = await _MyEventsViewModelObj.onLoad();
     await Future.delayed(Duration(seconds: 4));
-    await Navigator.pushReplacementNamed(context, '/home');
+    await Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'eventList': eventList,
+    });
   }
 
   @override

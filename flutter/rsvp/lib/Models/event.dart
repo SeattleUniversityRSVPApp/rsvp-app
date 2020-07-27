@@ -9,6 +9,16 @@ class Event {
   int _minNum;
   bool _status;
 
+  Map<dynamic, dynamic> toJson() => {
+    'name': _name,
+    'date': _date,
+  };
+
+  Event.fromJson(Map<dynamic, dynamic> json) {
+    _name = json['name'] as String;
+    _date = json['_date'] as String;
+  }
+
   Event(this._name, this._date); // Remove Later
 
   Event_Constructor(
