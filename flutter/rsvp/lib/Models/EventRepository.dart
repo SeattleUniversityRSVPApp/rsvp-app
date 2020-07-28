@@ -1,5 +1,6 @@
 import 'package:rsvp/Models/IEventRepository.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
+import 'package:rsvp/Models/LocalData.dart';
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
@@ -30,9 +31,7 @@ class EventRepository implements IEventRepository {
 
   @override
   List<Event> getMyEvents() {
-    // TODO: Get all of my event IDs from local storage then request the
-    // event details from the cache (or the service if it's not in the cache).
-    return null;
+    return LocalData().getCreatedEvents() + LocalData().getRespondedEvents();
   }
 
   @override
