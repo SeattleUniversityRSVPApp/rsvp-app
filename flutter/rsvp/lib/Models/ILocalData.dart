@@ -2,8 +2,8 @@ import 'event.dart';
 import 'dart:core';
 
 abstract class IlocalData {
-  List<String> getCreatedEvents();
+  List<Event> getCreatedEvents();
   String addCreatedEvents();
-  List<String> getRespondedEvents();
+  List<Event> getRespondedEvents();
   String addRespondedEvent();
 }
