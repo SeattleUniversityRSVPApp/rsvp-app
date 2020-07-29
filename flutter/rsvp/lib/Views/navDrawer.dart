@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rsvp/Models/EventRepository.dart';
+import 'package:rsvp/Models/MockEventService.dart';
+import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
 import 'package:rsvp/Views/createEvent.dart';
 import 'package:rsvp/Views/joinEvent.dart';
 import 'package:rsvp/Views/setting.dart';
@@ -41,7 +45,10 @@ class NavDrawer extends StatelessWidget {
             title: Text('Create Event'),
             onTap: () => {
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => CreateEvent())
+                builder: (context) => ChangeNotifierProvider(
+                  create: (_) => CreateEventViewModel(EventRepository(MockEventService())),
+                  child: CreateEvent(),
+                ))
               )
             },
           ),
