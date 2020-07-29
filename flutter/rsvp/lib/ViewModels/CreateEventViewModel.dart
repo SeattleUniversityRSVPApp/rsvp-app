@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 
-class CreateEventViewModel {
+class CreateEventViewModel extends ChangeNotifier {
   String defaultCreatorName = "Unknown";
   IEventRepository _eventRepository;
 

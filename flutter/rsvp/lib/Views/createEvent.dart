@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
 
 class CreateEvent extends StatefulWidget {
@@ -16,11 +17,12 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
+    var vm = Provider.of<CreateEventViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Create an Event'),
       ),
-      body: SingleChildScrollView (
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -31,12 +33,12 @@ class _CreateEventState extends State<CreateEvent> {
               getEventDescription(),
               getEventLocation(),
               RaisedButton(
-                child: Text('Add Event'),
-                onPressed: () async => {
-                  // Call Create Event View Model function!!!!!!!!!
-                  Navigator.pop(context),
-                }
-              )
+                  child: Text('Add Event'),
+                  onPressed: () async => {
+                        vm.createEvent(eventName, eventDate, minNum,
+                            eventDescription, eventLocation),
+                        Navigator.pop(context),
+                      })
             ],
           ),
         ),
@@ -50,7 +52,7 @@ class _CreateEventState extends State<CreateEvent> {
         Text('Event name: '),
         Container(
           width: 200,
-          child: TextField (
+          child: TextField(
             decoration: InputDecoration.collapsed(hintText: 'Title'),
             onChanged: (String text) {
               setState(() {
@@ -74,7 +76,7 @@ class _CreateEventState extends State<CreateEvent> {
         Text('Event date: '),
         Container(
           width: 200,
-          child: TextField (
+          child: TextField(
             decoration: InputDecoration.collapsed(hintText: 'Date'),
             onChanged: (String text) {
               setState(() {
@@ -125,7 +127,7 @@ class _CreateEventState extends State<CreateEvent> {
         Text('Event description: '),
         Container(
           width: 200,
-          child: TextField (
+          child: TextField(
             decoration: InputDecoration.collapsed(hintText: 'Description'),
             onChanged: (String text) {
               setState(() {
@@ -149,7 +151,7 @@ class _CreateEventState extends State<CreateEvent> {
         Text('Event location: '),
         Container(
           width: 200,
-          child: TextField (
+          child: TextField(
             decoration: InputDecoration.collapsed(hintText: 'Location'),
             onChanged: (String text) {
               setState(() {
@@ -166,5 +168,4 @@ class _CreateEventState extends State<CreateEvent> {
       ],
     );
   }
-
 }

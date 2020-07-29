@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
@@ -16,7 +15,6 @@ class _LoadingState extends State<Loading> {
     var _MyEventsViewModelObj = MyEventsViewModel();
 
     eventList = await _MyEventsViewModelObj.onLoad();
-    await Future.delayed(Duration(seconds: 4));
     await Navigator.pushReplacementNamed(context, '/home', arguments: {
       'eventList': eventList,
     });
