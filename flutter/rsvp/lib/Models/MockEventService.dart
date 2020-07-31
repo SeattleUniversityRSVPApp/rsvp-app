@@ -4,7 +4,7 @@ import 'event.dart';
 
 class MockEventService implements IEventWebService {
   static final MockEventService _webServiceSingleton =
-      MockEventService._internal();
+  MockEventService._internal();
 
   final Map<String, Event> _mockEventTable = <String, Event>{};
   int _eventIdCounter = 0;
@@ -41,7 +41,11 @@ class MockEventService implements IEventWebService {
   @override
   Event createEvent(String eventName, String eventDate, int minNum,
       String eventDescription, String eventLocation) {
-    return null;
+    var newEvent = Event(eventName, eventDate);
+    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = newEvent;
+    _eventIdCounter++;
+    // If unsuccessful to create a new event, return ull;
+    return newEvent;
   }
 
   @override
