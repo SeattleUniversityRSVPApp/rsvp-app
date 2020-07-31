@@ -6,13 +6,14 @@ import 'ILocalData.dart';
 import 'JsonHandler.dart';
 
 class LocalData implements IlocalData {
-  List<Event> createdEventsList;
-  List<Event> respondedEventsList;
+  static List<Event> createdEventsList = [];
+  static List<Event> respondedEventsList = [];
   String defaultName = null;
   String userId;
 
   @override
-  String addCreatedEvents() {
+  String addCreatedEvents(Event newEvent) {
+    createdEventsList.add(newEvent);
     return null;
   }
 
