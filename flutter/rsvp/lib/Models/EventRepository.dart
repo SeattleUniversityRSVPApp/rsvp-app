@@ -5,6 +5,7 @@ import 'event.dart';
 
 class EventRepository implements IEventRepository {
   static EventRepository _eventRepository = null;
+  static var _localDataObj = LocalData();
 
   final Map<String, Event> _cachedEvents = <String, Event>{};
   IEventWebService _eventWebService;
@@ -24,8 +25,14 @@ class EventRepository implements IEventRepository {
       String eventDescription, String eventLocation) {
     var aNewEvent = _eventWebService.createEvent(
         eventName, eventDate, minNum, eventDescription, eventLocation);
-    _cachedEvents[aNewEvent.link] =
-        aNewEvent; //save this new event in the cache in the memory.
+
+    if(aNewEvent != null) {
+      _localDataObj.addCreatedEvents(aNewEvent);
+
+      _cachedEvents[aNewEvent.link] =
+          aNewEvent; //save this new event in the cache in the memory.
+    }
+
     return aNewEvent;
   }
 
