@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
 import 'loading.dart';
 
@@ -8,12 +9,11 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-
-  String name;
+  String _name;
+  SettingsViewModel _settingViewModel;
 
   @override
   Widget build(BuildContext context) {
-    SettingsViewModel settingViewModel = new SettingsViewModel();
     return Scaffold(
       appBar: AppBar(
         title: Text('Setting'),
@@ -25,20 +25,21 @@ class _SettingState extends State<Setting> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              getName(),
+              _getName(),
               RaisedButton(
                   child: Text('Save'),
                   onPressed: () async => {
-                  settingViewModel.save(name),
-                    reload(),
-                    Navigator.pop(context),
-                  })
+                        _settingViewModel.save(_name),
+                        //reload(),
+                        Navigator.pop(context),
+                      })
             ],
           ),
         ),
       ),
     );
   }
+
   void reload() {
     runApp(MaterialApp(
       initialRoute: '/loading',
@@ -48,7 +49,7 @@ class _SettingState extends State<Setting> {
     ));
   }
 
-  Row getName() {
+  Row _getName() {
     return Row(
       children: <Widget>[
         Text(' Enter Name: '),
@@ -58,17 +59,24 @@ class _SettingState extends State<Setting> {
             decoration: InputDecoration.collapsed(hintText: ' type your name '),
             onChanged: (String text) {
               setState(() {
-                name = text;
+                _name = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                name = text;
+                _name = text;
               });
             },
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _settingViewModel = Provider.of<SettingsViewModel>(context);
+    _name = _settingViewModel.getName();
   }
 }
