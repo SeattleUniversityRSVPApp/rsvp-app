@@ -53,4 +53,15 @@ class LocalData implements IlocalData {
   List<String> saveEvents() {
     return null;
   }
+
+  @override
+  bool changeDefaultName(String name) {
+    defaultName = name;
+    return true;
+  }
+
+  @override
+  String getDefaultName() {
+    return defaultName;
+  }
 }

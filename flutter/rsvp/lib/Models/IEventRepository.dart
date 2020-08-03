@@ -13,4 +13,9 @@ abstract class IEventRepository {
   Event cancelEvent(String link);
 
   Event joinEvent(String link, String respondentName);
+
+  String getCustomerName();
+
+  bool setCustomerName(String name);
+
 }

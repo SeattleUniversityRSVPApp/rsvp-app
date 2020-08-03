@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:rsvp/ViewModels/SettingsViewModel.dart';
+import 'loading.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsViewModel settingViewModel = new SettingsViewModel();
     return Scaffold(
       appBar: AppBar(
         title: Text('Setting'),
@@ -27,6 +29,8 @@ class _SettingState extends State<Setting> {
               RaisedButton(
                   child: Text('Save'),
                   onPressed: () async => {
+                  settingViewModel.save(name),
+                    reload(),
                     Navigator.pop(context),
                   })
             ],
@@ -34,6 +38,14 @@ class _SettingState extends State<Setting> {
         ),
       ),
     );
+  }
+  void reload() {
+    runApp(MaterialApp(
+      initialRoute: '/loading',
+      routes: {
+        '/loading': (context) => Loading(),
+      },
+    ));
   }
 
   Row getName() {

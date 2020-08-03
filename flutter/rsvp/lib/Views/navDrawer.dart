@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/Models/EventRepository.dart';
+import 'package:rsvp/Models/ILocalData.dart';
 import 'package:rsvp/Models/MockEventService.dart';
 import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
+import 'package:rsvp/ViewModels/SettingsViewModel.dart';
 import 'package:rsvp/Views/createEvent.dart';
 import 'package:rsvp/Views/joinEvent.dart';
 import 'package:rsvp/Views/setting.dart';
@@ -26,7 +28,8 @@ class NavDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 12,),
                   Text(
-                    'JungBok Cho',
+                    //customer name
+                   SettingsViewModel().getName(),
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],

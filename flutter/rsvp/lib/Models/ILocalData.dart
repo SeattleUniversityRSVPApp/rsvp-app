@@ -6,4 +6,6 @@ abstract class IlocalData {
   String addCreatedEvents(Event newEvent);
   List<Event> getRespondedEvents();
   String addRespondedEvent();
+  String getDefaultName();
+  bool changeDefaultName(String name);
 }
