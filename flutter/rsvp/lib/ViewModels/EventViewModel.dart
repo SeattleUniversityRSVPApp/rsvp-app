@@ -20,6 +20,9 @@ class EventViewModel {
   // TODO: (Remove this later) use this link to learn how to format date and time: https://medium.com/flutter-community/working-with-dates-in-dart-e81c70911811 this part: Extracting / parsing date in specific format
   // date is a computed property.
   String get date {
+    if (_event.dateTime == null) {
+      return '';
+    }
     var localDateTime = _event.dateTime.toLocal();
     var formatter = DateFormat('yMMMMEEEEd'); //YEAR_MONTH_WEEKDAY_DAY
     /// Formatting dates in the default "en_US" format does not require any initialization. e.g.

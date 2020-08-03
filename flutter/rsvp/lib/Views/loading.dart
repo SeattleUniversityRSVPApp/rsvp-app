@@ -9,12 +9,11 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
   void setupWorldTime() async {
     List<Event> eventList;
-    var _MyEventsViewModelObj = MyEventsViewModel();
+    //var _MyEventsViewModelObj = MyEventsViewModel();
 
-    eventList = await _MyEventsViewModelObj.onLoad();
+    //eventList = await _MyEventsViewModelObj.onLoad();
     await Navigator.pushReplacementNamed(context, '/home', arguments: {
       'eventList': eventList,
     });
@@ -36,19 +35,20 @@ class _LoadingState extends State<Loading> {
           children: <Widget>[
             Text(
               'RSVP App',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 40),
             ),
-            SizedBox(height: 110,),
+            SizedBox(
+              height: 110,
+            ),
             Text(
               'Loading',
               style: TextStyle(
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             SpinKitCubeGrid(
               color: Colors.white,
               size: 50.0,
