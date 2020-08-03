@@ -1,49 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/Views/navDrawer.dart';
 import 'package:rsvp/Views/eventDetails.dart';
 import 'package:rsvp/Models/event.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  Map rcvdData = {};
-
-  @override
-  Widget build(BuildContext context) {
-    rcvdData = (rcvdData.isNotEmpty ? rcvdData : ModalRoute.of(context).settings.arguments) as Map;
-
-    return MaterialApp(
-      title: 'Flutter Demo',
-      /*theme: ThemeData(
-        primarySwatch: Colors.grey,
-      ),*/
-      home: MyHomePage(rcvdData['eventList']),
-    );
-  }
-}
-
 class MyHomePage extends StatefulWidget {
-  var events;
+  List<Event> _events;
 
-  MyHomePage(this.events);
+  MyHomePage(this._events);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(events as List<Event>);
+  _MyHomePageState createState() => _MyHomePageState(_events);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Event> events;   /*[
-    Event('Walk with dogs', '08/16/2020'),
-    Event('Finish this project', '09/08/2020'),
-    Event('Visit Museum', '10/28/2020'),
-    Event('Find internship', '11/17/2020'),
-    Event('Party Night', '12/31/2020'),
-  ];*/
+  List<Event> _events;
+  MyEventsViewModel _MyEventsViewModelObj;
 
-  _MyHomePageState(this.events);
+  _MyHomePageState(this._events);
 
   @override
   Widget build(BuildContext context) {
@@ -59,25 +33,27 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.grey[800],
       ),
       body: ListView.builder(
-        itemCount: events.length,
+        itemCount: _events.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
             child: Card(
               child: ListTile(
-                title: Text(events[index].name),
-                subtitle: Text(events[index].date),
+                title: Text(_events[index].name),
+                subtitle: Text(_events[index].date),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) =>
-                      EventDetails(event: events[index], delete: () {
-                        setState(() {
-                          events.remove(events[index]);
-                        });
-                      },
-                    )
-                  ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventDetails(
+                                event: _events[index],
+                                delete: () {
+                                  setState(() {
+                                    _events.remove(_events[index]);
+                                  });
+                                },
+                              )));
                 },
               ),
             ),
@@ -86,5 +62,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }
