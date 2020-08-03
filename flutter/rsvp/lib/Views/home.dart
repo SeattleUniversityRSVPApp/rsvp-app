@@ -6,19 +6,12 @@ import 'package:rsvp/Views/eventDetails.dart';
 import 'package:rsvp/Models/event.dart';
 
 class MyHomePage extends StatefulWidget {
-  List<Event> _events;
-
-  MyHomePage(this._events);
-
   @override
-  _MyHomePageState createState() => _MyHomePageState(_events);
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Event> _events;
   MyEventsViewModel _MyEventsViewModelObj;
-
-  _MyHomePageState(this._events);
 
   @override
   Widget build(BuildContext context) {

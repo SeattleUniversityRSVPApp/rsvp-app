@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RSVP App',
       initialRoute: '/',
-      home: MyHomePage(_events),
+      home: MyHomePage(),
 //        routes: {
 //      '/': (context) => MyHomePage(events),
 //      '/loading': (context) => Loading(),
