@@ -17,25 +17,32 @@ class MockEventService implements IEventWebService {
   MockEventService._internal() {
     // Initialization logic is here:
     // Add some events in the mock table:
-    var event1 = Event('Basketball Game', '08/03/2020');
-    var event2 = Event('Walk with dogs', '08/16/2020');
-    var event3 = Event('Finish this project', '09/08/2020');
-    var event4 = Event('Visit Museum', '10/28/2020');
-    var event5 = Event('Find internship', '11/17/2020');
-    var event6 = Event('Party Night', '12/31/2020');
+    var event1 = Event(_urlTemplate + (_eventIdCounter++).toString(),
+        'Basketball Game', '', '', DateTime.parse('2020-08-03'), '', 0, true);
+    var event2 = Event(_urlTemplate + (_eventIdCounter++).toString(),
+        'Walk with dogs', '', '', DateTime.parse('2020-08-16'), '', 0, true);
+    var event3 = Event(
+        _urlTemplate + (_eventIdCounter++).toString(),
+        'Finish this project',
+        '',
+        '',
+        DateTime.parse('2020-09-08'),
+        '',
+        0,
+        true);
+    var event4 = Event(_urlTemplate + (_eventIdCounter++).toString(),
+        'Visit Museum', '', '', DateTime.parse('2020-10-28'), '', 0, true);
+    var event5 = Event(_urlTemplate + (_eventIdCounter++).toString(),
+        'Find internship', '', '', DateTime.parse('2020-11-17'), '', 0, true);
+    var event6 = Event(_urlTemplate + (_eventIdCounter++).toString(),
+        'Party Night', '', '', DateTime.parse('2020-12-31'), '', 0, true);
 
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event1;
-    _eventIdCounter++;
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event2;
-    _eventIdCounter++;
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event3;
-    _eventIdCounter++;
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event4;
-    _eventIdCounter++;
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event5;
-    _eventIdCounter++;
-    _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = event6;
-    _eventIdCounter++;
+    _mockEventTable[event1.link] = event1;
+    _mockEventTable[event2.link] = event2;
+    _mockEventTable[event3.link] = event3;
+    _mockEventTable[event4.link] = event4;
+    _mockEventTable[event5.link] = event5;
+    _mockEventTable[event6.link] = event6;
   }
 
   @override
