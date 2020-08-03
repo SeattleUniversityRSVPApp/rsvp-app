@@ -1,23 +1,18 @@
-import 'package:rsvp/Models/EventRepository.dart';
-import 'package:rsvp/Models/IEventWebServcie.dart';
-import 'package:rsvp/Models/MockEventService.dart';
+import 'package:flutter/material.dart';
+import 'package:rsvp/Models/IEventRepository.dart';
 
-class SettingsViewModel {
-  static IEventWebService IEventWebServiceObj = MockEventService();
-  var EventRepositoryObj = EventRepository(IEventWebServiceObj);
+class SettingsViewModel extends ChangeNotifier {
+  final IEventRepository _eventRepositoryObj;
+
+  SettingsViewModel(this._eventRepositoryObj);
 
   bool save(String name) {
-       EventRepositoryObj.setCustomerName(name);
+    _eventRepositoryObj.setCustomerName(name);
+    // TODO: if an exception thrown by the repository or something happened, so the name didn't save, this method should return false. Otherwise return true.
     return true;
   }
 
   String getName() {
-    return EventRepositoryObj.getCustomerName();
+    return _eventRepositoryObj.getCustomerName();
   }
-
-  bool onLoad() {
-    EventRepositoryObj.getCustomerName();
-    return true;
-  }
-
 }
