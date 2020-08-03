@@ -67,4 +67,17 @@ class EventRepository implements IEventRepository {
   bool editEvent(String link, DateTime date, String location) {
     return false;
   }
+
+  @override
+  String getCustomerName()
+  {
+    return LocalData().getDefaultName();
+  }
+
+  @override
+  bool setCustomerName(String name)
+  {
+    return LocalData().changeDefaultName(name);
+  }
+
 }
