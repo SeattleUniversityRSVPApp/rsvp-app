@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:rsvp/Views/home.dart';
-import 'package:rsvp/Views/createEvent.dart';
-import 'package:rsvp/Views/eventDetails.dart';
-import 'package:rsvp/Views/loading.dart';
-import 'package:rsvp/Views/joinEvent.dart';
+
+import 'Models/event.dart';
 
 void main() {
-  runApp(MaterialApp(
-    initialRoute: '/loading',
-    routes: {
-      '/loading': (context) => Loading(),
-      '/home': (context) => Home(),
-      '/CreateEvent': (context) => CreateEvent(),
-      '/JoinEvent': (context) => JoinEvent(),
-      '/FullEventInfo': (context) => EventDetails(),
-    },
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  final List<Event> _events = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'RSVP App',
+      initialRoute: '/',
+      home: MyHomePage(_events),
+//        routes: {
+//      '/': (context) => MyHomePage(events),
+//      '/loading': (context) => Loading(),
+//      '/CreateEvent': (context) => CreateEvent(),
+//      '/JoinEvent': (context) => JoinEvent(),
+//      '/FullEventInfo': (context) => EventDetails(),
+    );
+  }
 }
