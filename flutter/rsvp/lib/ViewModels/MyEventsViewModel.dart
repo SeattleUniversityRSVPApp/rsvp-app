@@ -1,32 +1,26 @@
-import 'package:rsvp/Models/EventRepository.dart';
-import 'package:rsvp/Models/IEventWebServcie.dart';
-import 'package:rsvp/Models/MockEventService.dart';
-import 'package:rsvp/Models/event.dart';
+import 'package:flutter/material.dart';
+import 'package:rsvp/Models/IEventRepository.dart';
+import 'package:rsvp/ViewModels/EventViewModel.dart';
 
-class MyEventsViewModel {
-  static IEventWebService IEventWebServiceObj = MockEventService();
-  var EventRepositoryObj = EventRepository(IEventWebServiceObj);
-  List<Event> events;
+class MyEventsViewModel extends ChangeNotifier {
+  List<EventViewModel> _events;
 
-  openEventDetails() {
+  IEventRepository _repository;
 
+  MyEventsViewModel(this._repository);
+
+  openEventDetails() {}
+
+  openCreateEvent() {}
+
+  openJoinEvent() {}
+
+  openSettings() {}
+
+  List<EventViewModel> get events => _events;
+
+  void onLoad() {
+    var allEvents = _repository.getMyEvents();
+    _events = allEvents.map((x) => EventViewModel(x)).toList();
   }
-
-  openCreateEvent() {
-
-  }
-
-  openJoinEvent() {
-
-  }
-
-  openSettings() {
-
-  }
-
-  List<Event> onLoad() {
-    return EventRepositoryObj.getMyEvents();
-  }
-
-
 }

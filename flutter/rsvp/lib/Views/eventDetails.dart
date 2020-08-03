@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rsvp/Models/event.dart';
+import 'package:rsvp/ViewModels/EventViewModel.dart';
 
 class EventDetails extends StatelessWidget {
-  final Event event;
+  final EventViewModel event;
   final Function delete;
+
   EventDetails({this.event, this.delete});
 
   @override
@@ -23,7 +25,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(20,8,12,8),
+          padding: const EdgeInsets.fromLTRB(20, 8, 12, 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -58,4 +60,3 @@ class EventDetails extends StatelessWidget {
     );
   }
 }
-

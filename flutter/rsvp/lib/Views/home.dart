@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/Views/navDrawer.dart';
 import 'package:rsvp/Views/eventDetails.dart';
@@ -22,44 +23,45 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      drawer: Container(
-        child: NavDrawer(),
-        width: 235,
-      ),
-      appBar: AppBar(
-        title: Text('RSVP'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[800],
-      ),
-      body: ListView.builder(
-        itemCount: _events.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-            child: Card(
-              child: ListTile(
-                title: Text(_events[index].name),
-                subtitle: Text(_events[index].date),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EventDetails(
-                                event: _events[index],
-                                delete: () {
-                                  setState(() {
-                                    _events.remove(_events[index]);
-                                  });
-                                },
-                              )));
-                },
-              ),
-            ),
-          );
-        },
-      ),
-    );
+        backgroundColor: Colors.grey[200],
+        drawer: Container(
+          child: NavDrawer(),
+          width: 235,
+        ),
+        appBar: AppBar(
+          title: Text('RSVP'),
+          centerTitle: true,
+          backgroundColor: Colors.grey[800],
+        ),
+        body: ListView(
+          children: _MyEventsViewModelObj.events
+              .map((anEvent) => ListTile(
+                    title: Text(anEvent.name),
+                    subtitle: Text(anEvent.date),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventDetails(
+                                    event: anEvent,
+                                    delete: () {
+                                      // TODO: add a delete function in MyEventsViewModel and call it here
+//                                  setState(() =>
+//                                    _events.remove(anEvent)
+//                                  );
+                                    },
+                                  )));
+                    },
+                  ))
+              .toList(),
+        ));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _MyEventsViewModelObj = Provider.of<MyEventsViewModel>(context);
+    _MyEventsViewModelObj.onLoad();
   }
 }
