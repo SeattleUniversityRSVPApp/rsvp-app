@@ -11,6 +11,8 @@ class LocalData implements IlocalData {
   String defaultName = null;
   String userId;
 
+  final _urlTemplate = 'https://www.my-test-unique-url-';
+
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
@@ -19,9 +21,12 @@ class LocalData implements IlocalData {
 
   @override
   List<Event> getCreatedEvents() {
+    var eventIdCounter = 1;
     createdEventsList = [
-      Event('Walk with dogs', '08/16/2020'),
-      Event('Finish this project', '09/08/2020'),
+      Event(_urlTemplate + (eventIdCounter++).toString(), 'Walk with dogs', '',
+          '', DateTime.parse('2020-08-16'), '', 0, true),
+      Event(_urlTemplate + (eventIdCounter++).toString(), 'Finish this project',
+          '', '', DateTime.parse('2020-09-08'), '', 0, true),
     ];
     return createdEventsList;
   }
@@ -33,10 +38,14 @@ class LocalData implements IlocalData {
 
   @override
   List<Event> getRespondedEvents() {
+    var eventIdCounter = 3;
     respondedEventsList = [
-      Event('Visit Museum', '10/28/2020'),
-      Event('Find internship', '11/17/2020'),
-      Event('Party Night', '12/31/2020'),
+      Event(_urlTemplate + (eventIdCounter++).toString(), 'Visit Museum', '',
+          '', DateTime.parse('2020-10-28'), '', 0, true),
+      Event(_urlTemplate + (eventIdCounter++).toString(), 'Find internship', '',
+          '', DateTime.parse('2020-11-17'), '', 0, true),
+      Event(_urlTemplate + (eventIdCounter++).toString(), 'Party Night', '', '',
+          DateTime.parse('2020-12-31'), '', 0, true),
     ];
     return respondedEventsList;
   }
@@ -44,5 +53,4 @@ class LocalData implements IlocalData {
   List<String> saveEvents() {
     return null;
   }
-
 }

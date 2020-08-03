@@ -1,7 +1,6 @@
 class Event {
   String _link;
   String _name;
-  String _date; // Remove it later. Just use _dateTime
   DateTime _dateTime;
   String _description;
   String _creator;
@@ -11,17 +10,15 @@ class Event {
 
   Map<dynamic, dynamic> toJson() => {
     'name': _name,
-    'date': _date,
+    'date': _dateTime,
   };
 
   Event.fromJson(Map<dynamic, dynamic> json) {
     _name = json['name'] as String;
-    _date = json['_date'] as String;
+    _dateTime = DateTime.parse(json['_date'] as String);
   }
 
-  Event(this._name, this._date); // Remove Later
-
-  Event_Constructor(
+  Event(
       String link,
       String name,
       String creator,
@@ -55,13 +52,6 @@ class Event {
   bool get status => _status;
 
   String get description => _description;
-
-  // Remove this later
-  String get date => _date;
-
-  set date(String value) {
-    _date = value;
-  } // Remove THis later
 
   set description(String value) {
     _description = value;
