@@ -21,12 +21,12 @@ class EventRepository implements IEventRepository {
   EventRepository._internal(this._eventWebService);
 
   @override
-  Event createEvent(String eventName, String eventDate, int minNum,
+  Event createEvent(String eventName, DateTime eventDate, int minNum,
       String eventDescription, String eventLocation) {
     var aNewEvent = _eventWebService.createEvent(
         eventName, eventDate, minNum, eventDescription, eventLocation);
 
-    if(aNewEvent != null) {
+    if (aNewEvent != null) {
       _localDataObj.addCreatedEvents(aNewEvent);
 
       _cachedEvents[aNewEvent.link] =
@@ -49,6 +49,7 @@ class EventRepository implements IEventRepository {
   @override
   List<Event> getMyEvents() {
     return LocalData().getCreatedEvents() + LocalData().getRespondedEvents();
+    // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
   @override
@@ -69,15 +70,12 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  String getCustomerName()
-  {
+  String getCustomerName() {
     return LocalData().getDefaultName();
   }
 
   @override
-  bool setCustomerName(String name)
-  {
+  bool setCustomerName(String name) {
     return LocalData().changeDefaultName(name);
   }
-
 }
