@@ -8,14 +8,21 @@ class Event {
   int _minNum;
   bool _status;
 
-  Map<dynamic, dynamic> toJson() => {
+  Map toJson() => {
+    'link': _link,
     'name': _name,
-    'date': _dateTime,
+    'date': dateTime.toString(),
+    'description': _description,
+    'creator': _creator,
+    'location': _location,
+    'minNum': minNum.toString(),
+    'status': status.toString(),
   };
 
-  Event.fromJson(Map<dynamic, dynamic> json) {
-    _name = json['name'] as String;
-    _dateTime = DateTime.parse(json['_date'] as String);
+  factory Event.fromJson(dynamic json) {
+    return Event(json['link'] as String, json['name'] as String, json['creator'] as String,
+        json['description'] as String, DateTime.parse(json['date'] as String),
+        json['location'] as String, json['minNum'] as int, json['status'] as bool);
   }
 
   Event(
