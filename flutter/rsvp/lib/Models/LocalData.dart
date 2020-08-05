@@ -22,12 +22,30 @@ class LocalData implements IlocalData {
   @override
   List<Event> getCreatedEvents() {
     var eventIdCounter = 1;
-    createdEventsList = [
-      Event(_urlTemplate + (eventIdCounter++).toString(), 'Walk with dogs', '',
-          '', DateTime.parse('2020-08-16'), '', 0, true),
-      Event(_urlTemplate + (eventIdCounter++).toString(), 'Finish this project',
-          '', '', DateTime.parse('2020-09-08'), '', 0, true),
-    ];
+    if (createdEventsList.isEmpty) {
+      // TODO: Move this to a MockLocalData class instead
+      createdEventsList = [
+        Event(
+            _urlTemplate + (eventIdCounter++).toString(),
+            'Walk with dogs',
+            '',
+            '',
+            DateTime.parse('2020-08-16'),
+            '',
+            0,
+            true),
+        Event(
+            _urlTemplate + (eventIdCounter++).toString(),
+            'Finish this project',
+            '',
+            '',
+            DateTime.parse('2020-09-08'),
+            '',
+            0,
+            true),
+      ];
+    }
+
     return createdEventsList;
   }
 

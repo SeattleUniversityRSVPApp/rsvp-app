@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'event.dart';
 
 abstract class IEventRepository {
@@ -17,5 +19,7 @@ abstract class IEventRepository {
   String getCustomerName();
 
   bool setCustomerName(String name);
+
+  void addMyEventsListener(VoidCallback listener);
 
 }
