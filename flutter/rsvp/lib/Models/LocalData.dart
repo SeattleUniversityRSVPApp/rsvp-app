@@ -16,6 +16,8 @@ class LocalData implements IlocalData {
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
+    String testToJson = jsonEncode(createdEventsList);
+    print(testToJson);
     return null;
   }
 
@@ -44,9 +46,22 @@ class LocalData implements IlocalData {
             0,
             true),
       ];
-    }
-
+    // TODO:Call Function in JsonHandler
+    String testToJson = jsonEncode(createdEventsList);
+    List userMap = jsonDecode(testToJson) as List;
+    List<Event> newList = convertDynamicListToEventList(userMap);
+    print(newList);
     return createdEventsList;
+  }
+
+  List<Event> convertDynamicListToEventList(List userMap) {
+    List<Event> newList = [];
+    for(int i = 0; i < userMap.length; i++) {
+      newList.add(Event(userMap[i]['link'] as String, userMap[i]['name'] as String, userMap[i]['creator'] as String,
+          userMap[i]['description'] as String, DateTime.parse(userMap[i]['date'] as String),
+          userMap[i]['location'] as String, int.parse(userMap[i]['minNum'] as String), userMap[0]['status'] == "true"));
+    }
+    return newList;
   }
 
   @override

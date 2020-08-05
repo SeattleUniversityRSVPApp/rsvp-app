@@ -1,14 +1,14 @@
-import 'package:rsvp/Models/event.dart';
+import 'package:flutter/services.dart';
 
 class JsonHandler {
-  Event eventObj;
-
-  FromEventListToJsonList() {
-
+  Future<String> _loadCreatedEvents() async {
+    return await rootBundle.loadString('lib/Models/test.txt');
   }
 
-  FromJsonListToEventList() {
-
+  Future<String> loadCreatedEvents() async {
+    var jsonString = await _loadCreatedEvents();
+    //final jsonResponse = json.decode(jsonString);
+    print(jsonString);
+    return jsonString ;
   }
-
 }
