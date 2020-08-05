@@ -5,22 +5,13 @@ import 'package:rsvp/Models/ILocalData.dart';
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
-  static EventRepository _eventRepository = null;
   IlocalData _localDataObj = null;
 
   final Map<String, Event> _cachedEvents = <String, Event>{};
   IEventWebService _eventWebService;
   List<VoidCallback> _myEventsListeners = [];
 
-  factory EventRepository(IEventWebService eventWebService, IlocalData localData) {
-    if (_eventRepository == null) {
-      _eventRepository = EventRepository._internal(eventWebService, localData);
-    }
-
-    return _eventRepository;
-  }
-
-  EventRepository._internal(this._eventWebService, this._localDataObj);
+  EventRepository(this._eventWebService, this._localDataObj);
 
   @override
   Event createEvent(String eventName, DateTime eventDate, int minNum,
