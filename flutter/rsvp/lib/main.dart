@@ -7,10 +7,11 @@ import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
 import 'package:rsvp/Views/home.dart';
 
+import 'Models/LocalData.dart';
 import 'Models/event.dart';
 
 void main() {
-  var repository = EventRepository(MockEventService());
+  var repository = EventRepository(MockEventService(), LocalData());
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(

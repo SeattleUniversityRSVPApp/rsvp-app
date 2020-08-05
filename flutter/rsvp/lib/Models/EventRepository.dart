@@ -1,24 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
-import 'package:rsvp/Models/LocalData.dart';
+import 'package:rsvp/Models/ILocalData.dart';
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
   static EventRepository _eventRepository = null;
-  static var _localDataObj = LocalData();
+  IlocalData _localDataObj = null;
 
   final Map<String, Event> _cachedEvents = <String, Event>{};
   IEventWebService _eventWebService;
+  List<VoidCallback> _myEventsListeners = [];
 
-  factory EventRepository(IEventWebService eventWebService) {
+  factory EventRepository(IEventWebService eventWebService, IlocalData localData) {
     if (_eventRepository == null) {
-      _eventRepository = EventRepository._internal(eventWebService);
+      _eventRepository = EventRepository._internal(eventWebService, localData);
     }
 
     return _eventRepository;
   }
 
-  EventRepository._internal(this._eventWebService);
+  EventRepository._internal(this._eventWebService, this._localDataObj);
 
   @override
   Event createEvent(String eventName, DateTime eventDate, int minNum,
@@ -31,6 +33,10 @@ class EventRepository implements IEventRepository {
 
       _cachedEvents[aNewEvent.link] =
           aNewEvent; //save this new event in the cache in the memory.
+
+      for (var listener in _myEventsListeners) {
+        listener.call();
+      }
     }
 
     return aNewEvent;
@@ -48,7 +54,7 @@ class EventRepository implements IEventRepository {
 
   @override
   List<Event> getMyEvents() {
-    return LocalData().getCreatedEvents() + LocalData().getRespondedEvents();
+    return _localDataObj.getCreatedEvents() + _localDataObj.getRespondedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
@@ -71,11 +77,16 @@ class EventRepository implements IEventRepository {
 
   @override
   String getCustomerName() {
-    return LocalData().getDefaultName();
+    return _localDataObj.getDefaultName();
   }
 
   @override
   bool setCustomerName(String name) {
-    return LocalData().changeDefaultName(name);
+    return _localDataObj.changeDefaultName(name);
+  }
+
+  @override
+  void addMyEventsListener(VoidCallback listener) {
+    _myEventsListeners.add(listener);
   }
 }
