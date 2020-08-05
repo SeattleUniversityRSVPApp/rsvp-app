@@ -44,15 +44,13 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.add),
             title: Text('Create Event'),
-            onTap: () => {
+            onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ChangeNotifierProvider(
-                            create: (_) => CreateEventViewModel(
-                                EventRepository(MockEventService())),
-                            child: CreateEvent(),
-                          )))
+                    builder: (context) => CreateEvent(),
+                  ));
             },
           ),
           ListTile(
