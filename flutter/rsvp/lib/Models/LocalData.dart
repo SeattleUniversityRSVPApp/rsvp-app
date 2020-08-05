@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:rsvp/Models/event.dart';
+import 'package:rsvp/Models/JsonHandler.dart';
 import 'ILocalData.dart';
-import 'JsonHandler.dart';
 
 class LocalData implements IlocalData {
   static List<Event> createdEventsList = [];
@@ -16,6 +14,8 @@ class LocalData implements IlocalData {
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
+    String testToJson = jsonEncode(createdEventsList);
+    print(testToJson);
     return null;
   }
 
@@ -28,7 +28,22 @@ class LocalData implements IlocalData {
       Event(_urlTemplate + (eventIdCounter++).toString(), 'Finish this project',
           '', '', DateTime.parse('2020-09-08'), '', 0, true),
     ];
+    // TODO:Call Function in JsonHandler
+    String testToJson = jsonEncode(createdEventsList);
+    List userMap = jsonDecode(testToJson) as List;
+    List<Event> newList = convertDynamicListToEventList(userMap);
+    print(newList);
     return createdEventsList;
+  }
+
+  List<Event> convertDynamicListToEventList(List userMap) {
+    List<Event> newList = [];
+    for(int i = 0; i < userMap.length; i++) {
+      newList.add(Event(userMap[i]['link'] as String, userMap[i]['name'] as String, userMap[i]['creator'] as String,
+          userMap[i]['description'] as String, DateTime.parse(userMap[i]['date'] as String),
+          userMap[i]['location'] as String, int.parse(userMap[i]['minNum'] as String), userMap[0]['status'] == "true"));
+    }
+    return newList;
   }
 
   @override
