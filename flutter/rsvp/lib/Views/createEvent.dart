@@ -9,15 +9,15 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  String eventName;
-  String eventDate;
-  int minNum;
-  String eventDescription;
-  String eventLocation;
+  CreateEventViewModel _createEventViewModel;
+  String _eventName;
+  String _eventDate;
+  int _minNum;
+  String _eventDescription;
+  String _eventLocation;
 
   @override
   Widget build(BuildContext context) {
-    var vm = Provider.of<CreateEventViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Create an Event'),
@@ -34,9 +34,13 @@ class _CreateEventState extends State<CreateEvent> {
               getEventLocation(),
               RaisedButton(
                   child: Text('Add Event'),
-                  onPressed: () async => {
-                        vm.createEvent(eventName, eventDate, minNum,
-                            eventDescription, eventLocation),
+                  onPressed: () => {
+                        _createEventViewModel.createEvent(
+                            _eventName,
+                            _eventDate,
+                            _minNum,
+                            _eventDescription,
+                            _eventLocation),
                         Navigator.pop(context),
                       })
             ],
@@ -56,12 +60,12 @@ class _CreateEventState extends State<CreateEvent> {
             decoration: InputDecoration.collapsed(hintText: 'Title'),
             onChanged: (String text) {
               setState(() {
-                eventName = text;
+                _eventName = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventName = text;
+                _eventName = text;
               });
             },
           ),
@@ -77,15 +81,15 @@ class _CreateEventState extends State<CreateEvent> {
         Container(
           width: 200,
           child: TextField(
-            decoration: InputDecoration.collapsed(hintText: 'Date'),
+            decoration: InputDecoration.collapsed(hintText: 'm/d/y'),
             onChanged: (String text) {
               setState(() {
-                eventDate = text;
+                _eventDate = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventDate = text;
+                _eventDate = text;
               });
             },
           ),
@@ -104,12 +108,12 @@ class _CreateEventState extends State<CreateEvent> {
             decoration: InputDecoration.collapsed(hintText: 'Num'),
             onChanged: (String text) {
               setState(() {
-                minNum = int.parse(text);
+                _minNum = int.parse(text);
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                minNum = int.parse(text);
+                _minNum = int.parse(text);
               });
             },
             inputFormatters: <TextInputFormatter>[
@@ -131,12 +135,12 @@ class _CreateEventState extends State<CreateEvent> {
             decoration: InputDecoration.collapsed(hintText: 'Description'),
             onChanged: (String text) {
               setState(() {
-                eventDescription = text;
+                _eventDescription = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventDescription = text;
+                _eventDescription = text;
               });
             },
           ),
@@ -155,17 +159,23 @@ class _CreateEventState extends State<CreateEvent> {
             decoration: InputDecoration.collapsed(hintText: 'Location'),
             onChanged: (String text) {
               setState(() {
-                eventLocation = text;
+                _eventLocation = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventLocation = text;
+                _eventLocation = text;
               });
             },
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _createEventViewModel = Provider.of<CreateEventViewModel>(context);
   }
 }
