@@ -46,10 +46,10 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  Event createEvent(String eventName, String eventDate, int minNum,
+  Event createEvent(String eventName, DateTime eventDate, int minNum,
       String eventDescription, String eventLocation) {
     var newEvent = Event(_urlTemplate + (_eventIdCounter++).toString(),eventName,
-        '', eventDescription, DateTime.parse(eventDate), eventLocation, minNum, true);
+        '', eventDescription, eventDate, eventLocation, minNum, true);
     _mockEventTable[_urlTemplate + _eventIdCounter.toString()] = newEvent;
     // If unsuccessful to create a new event, return ull;
     return newEvent;
