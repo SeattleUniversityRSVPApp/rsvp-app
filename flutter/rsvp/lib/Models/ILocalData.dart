@@ -2,10 +2,10 @@ import 'event.dart';
 import 'dart:core';
 
 abstract class IlocalData {
-  List<Event> getCreatedEvents();
+  Future<List<Event>> getCreatedEvents();
   String addCreatedEvents(Event newEvent);
-  List<Event> getRespondedEvents();
-  String addRespondedEvent();
+  Future<List<Event>> getRespondedEvents();
+  String addRespondedEvent(Event newEvent);
   String getDefaultName();
   bool changeDefaultName(String name);
 }

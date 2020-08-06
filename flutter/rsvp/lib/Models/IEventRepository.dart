@@ -10,7 +10,7 @@ abstract class IEventRepository {
 
   Event getEvent(String link);
 
-  List<Event> getMyEvents();
+  Future<List<Event>> getMyEvents();
 
   Event cancelEvent(String link);
 

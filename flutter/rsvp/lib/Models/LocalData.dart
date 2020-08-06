@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:rsvp/Models/event.dart';
 import 'ILocalData.dart';
 import 'JsonHandler.dart';
@@ -16,14 +15,16 @@ class LocalData implements IlocalData {
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
-    String testToJson = jsonEncode(createdEventsList);
-    print(testToJson);
+    String stringJsonFormat = jsonEncode(createdEventsList);
+    print(stringJsonFormat);
+    JsonHandler().saveCreatedEvents(stringJsonFormat);
     return null;
   }
 
   @override
-  List<Event> getCreatedEvents() {
-    var eventIdCounter = 1;
+  Future<List<Event>> getCreatedEvents() async {
+    /// To Test Created Events
+    /*var eventIdCounter = 1;
     if (createdEventsList.isEmpty) {
       // TODO: Move this to a MockLocalData class instead
       createdEventsList = [
@@ -46,15 +47,17 @@ class LocalData implements IlocalData {
             0,
             true),
       ];
-    // TODO:Call Function in JsonHandler
-    String testToJson = jsonEncode(createdEventsList);
-    List userMap = jsonDecode(testToJson) as List;
-    List<Event> newList = convertDynamicListToEventList(userMap);
-    print(newList);
+    }
+    String stringJsonFormat2 = jsonEncode(createdEventsList);
+    print(stringJsonFormat2);
+    JsonHandler().saveCreatedEvents(stringJsonFormat2);*/
+    String stringJsonFormat = await JsonHandler().readCreatedEvents();
+    List userMap = jsonDecode(stringJsonFormat) as List;
+    createdEventsList = _convertDynamicListToEventList(userMap);
     return createdEventsList;
   }
 
-  List<Event> convertDynamicListToEventList(List userMap) {
+  List<Event> _convertDynamicListToEventList(List userMap) {
     List<Event> newList = [];
     for(int i = 0; i < userMap.length; i++) {
       newList.add(Event(userMap[i]['link'] as String, userMap[i]['name'] as String, userMap[i]['creator'] as String,
@@ -65,13 +68,17 @@ class LocalData implements IlocalData {
   }
 
   @override
-  String addRespondedEvent() {
+  String addRespondedEvent(Event newEvent) {
+    String stringJsonFormat = jsonEncode(respondedEventsList);
+    print(stringJsonFormat);
+    JsonHandler().saveCreatedEvents(stringJsonFormat);
     return null;
   }
 
   @override
-  List<Event> getRespondedEvents() {
-    var eventIdCounter = 3;
+  Future<List<Event>> getRespondedEvents() async {
+    /// To Test Responded Events
+    /*var eventIdCounter = 3;
     respondedEventsList = [
       Event(_urlTemplate + (eventIdCounter++).toString(), 'Visit Museum', '',
           '', DateTime.parse('2020-10-28'), '', 0, true),
@@ -80,6 +87,12 @@ class LocalData implements IlocalData {
       Event(_urlTemplate + (eventIdCounter++).toString(), 'Party Night', '', '',
           DateTime.parse('2020-12-31'), '', 0, true),
     ];
+    String stringJsonFormat = jsonEncode(respondedEventsList);
+    print(stringJsonFormat);
+    JsonHandler().saveRespondedEvents(stringJsonFormat);*/
+    String stringJsonFormat = await JsonHandler().readRespondedEvents();
+    List userMap = jsonDecode(stringJsonFormat) as List;
+    respondedEventsList = _convertDynamicListToEventList(userMap);
     return respondedEventsList;
   }
 
@@ -97,4 +110,5 @@ class LocalData implements IlocalData {
   String getDefaultName() {
     return defaultName;
   }
+
 }
