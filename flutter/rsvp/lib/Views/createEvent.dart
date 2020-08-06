@@ -37,7 +37,7 @@ class _CreateEventState extends State<CreateEvent> {
                   onPressed: () => {
                         _createEventViewModel.createEvent(
                             _eventName,
-                            _eventDate,
+                            _eventDate.substring(0, _eventDate.length-1),
                             _minNum,
                             _eventDescription,
                             _eventLocation),

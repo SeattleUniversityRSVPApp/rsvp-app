@@ -18,7 +18,6 @@ class EventRepository implements IEventRepository {
       String eventDescription, String eventLocation) {
     var aNewEvent = _eventWebService.createEvent(
         eventName, eventDate, minNum, eventDescription, eventLocation);
-
     if (aNewEvent != null) {
       _localDataObj.addCreatedEvents(aNewEvent);
 
@@ -44,8 +43,8 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  List<Event> getMyEvents() {
-    return _localDataObj.getCreatedEvents() + _localDataObj.getRespondedEvents();
+  Future<List<Event>> getMyEvents() async {
+    return await _localDataObj.getCreatedEvents() + await _localDataObj.getRespondedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
