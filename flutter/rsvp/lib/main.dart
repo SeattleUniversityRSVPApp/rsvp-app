@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/Models/EventRepository.dart';
 import 'package:rsvp/Models/MockEventService.dart';
+import 'package:rsvp/Models/MockLocalData.dart';
 import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
@@ -11,7 +12,9 @@ import 'Models/LocalData.dart';
 import 'Models/event.dart';
 
 void main() {
-  var repository = EventRepository(MockEventService(), LocalData());
+  var localData = MockLocalData(); // Uncomment to use fake data
+//  var localData = LocalData();  // Uncomment to use real local data
+  var repository = EventRepository(MockEventService(), localData);
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
