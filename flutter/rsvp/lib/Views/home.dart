@@ -13,6 +13,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   MyEventsViewModel _MyEventsViewModelObj;
 
+  Future _viewModelLoadedFuture;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,35 +28,50 @@ class _MyHomePageState extends State<MyHomePage> {
           centerTitle: true,
           backgroundColor: Colors.grey[800],
         ),
-        body: ListView(
-          children: _MyEventsViewModelObj.events
-              .map((anEvent) => ListTile(
-                    title: Text(anEvent.name),
-                    subtitle: Text(anEvent.date),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventDetails(
-                                    event: anEvent,
-                                    delete: () {
-                                      // TODO: add a delete function in MyEventsViewModel and call it here
+        body: FutureBuilder(
+          future: _viewModelLoadedFuture,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Something went wrong."),
+              );
+            } else {
+              return buildListView(context);
+            }
+          },
+        ));
+  }
+
+  ListView buildListView(BuildContext context) {
+    return ListView(
+      children: _MyEventsViewModelObj.events
+          .map((anEvent) => ListTile(
+                title: Text(anEvent.name),
+                subtitle: Text(anEvent.date),
+                trailing: Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventDetails(
+                                event: anEvent,
+                                delete: () {
+                                  // TODO: add a delete function in MyEventsViewModel and call it here
 //                                  setState(() =>
 //                                    _events.remove(anEvent)
 //                                  );
-                                    },
-                                  )));
-                    },
-                  ))
-              .toList(),
-        ));
+                                },
+                              )));
+                },
+              ))
+          .toList(),
+    );
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _MyEventsViewModelObj = Provider.of<MyEventsViewModel>(context);
-    _MyEventsViewModelObj.onLoad();
+    _viewModelLoadedFuture = _MyEventsViewModelObj.onLoad();
   }
 }

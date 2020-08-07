@@ -20,8 +20,8 @@ class MyEventsViewModel extends ChangeNotifier {
 
   List<EventViewModel> get events => _events;
 
-  void onLoad() async {
-    var allEvents =  await _repository.getMyEvents();
+  Future onLoad() async {
+    var allEvents = await _repository.getMyEvents();
     _repository.addMyEventsListener(() => notifyListeners());
     _events = allEvents.map((x) => EventViewModel(x)).toList();
   }
