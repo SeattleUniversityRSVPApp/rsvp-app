@@ -1,20 +1,16 @@
+import 'package:rsvp/Models/FakeData.dart';
 import 'package:rsvp/Models/ILocalData.dart';
 
 import 'event.dart';
 
 class MockLocalData extends IlocalData {
-  static final _urlTemplate = 'https://www.my-test-unique-url-';
   List<Event> _createdEvents = [
-    Event(_urlTemplate + (1).toString(), 'Walk with dogs', '', '',
-        DateTime.parse('2020-08-16'), '', 0, true),
-    Event(_urlTemplate + (2).toString(), 'Finish this project', '', '',
-        DateTime.parse('2020-09-08'), '', 0, true),
+    FakeData.fakeEventData[1],
+    FakeData.fakeEventData[2],
   ];
   List<Event> _respondedEvents = [
-    Event(_urlTemplate + (4).toString(), 'Find internship', '', '',
-        DateTime.parse('2020-11-17'), '', 0, true),
-    Event(_urlTemplate + (5).toString(), 'Party Night', '', '',
-        DateTime.parse('2020-12-31'), '', 0, true),
+    FakeData.fakeEventData[4],
+    FakeData.fakeEventData[5],
   ];
   String _defaultName = "Unknown";
 
