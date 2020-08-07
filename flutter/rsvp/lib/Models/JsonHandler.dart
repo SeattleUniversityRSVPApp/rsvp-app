@@ -10,14 +10,10 @@ class JsonHandler {
   }
 
   Future<String> readCreatedEvents() async {
-    try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/createdEvents.txt');
-      String text = await file.readAsString();
+      var text = await file.readAsString();
       return text;
-    } catch (e) {
-      print("Created file: Couldn't read file");
-    }
   }
 
   saveRespondedEvents(String stringJsonFormat) async {
@@ -28,14 +24,9 @@ class JsonHandler {
   }
 
   Future<String> readRespondedEvents() async {
-    try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/respondedEvents.txt');
-      String text = await file.readAsString();
+      var text = await file.readAsString();
       return text;
-    } catch (e) {
-      print("Responded file: Couldn't read file");
-    }
   }
-
 }

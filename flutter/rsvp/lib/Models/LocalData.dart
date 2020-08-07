@@ -10,8 +10,6 @@ class LocalData implements IlocalData {
   String defaultName = null;
   String userId;
 
-  final _urlTemplate = 'https://www.my-test-unique-url-';
-
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
@@ -51,18 +49,29 @@ class LocalData implements IlocalData {
     String stringJsonFormat2 = jsonEncode(createdEventsList);
     print(stringJsonFormat2);
     JsonHandler().saveCreatedEvents(stringJsonFormat2);*/
-    String stringJsonFormat = await JsonHandler().readCreatedEvents();
-    List userMap = jsonDecode(stringJsonFormat) as List;
-    createdEventsList = _convertDynamicListToEventList(userMap);
+    try {
+      String stringJsonFormat = await JsonHandler().readCreatedEvents();
+      List userMap = jsonDecode(stringJsonFormat) as List;
+      createdEventsList = _convertDynamicListToEventList(userMap);
+    } catch (exception) {
+      // If the file doesn't exist, there aren't any createdEvents. So, return an empty list.
+      print("Created file: Couldn't read this file");
+    }
     return createdEventsList;
   }
 
   List<Event> _convertDynamicListToEventList(List userMap) {
     List<Event> newList = [];
-    for(int i = 0; i < userMap.length; i++) {
-      newList.add(Event(userMap[i]['link'] as String, userMap[i]['name'] as String, userMap[i]['creator'] as String,
-          userMap[i]['description'] as String, DateTime.parse(userMap[i]['date'] as String),
-          userMap[i]['location'] as String, int.parse(userMap[i]['minNum'] as String), userMap[0]['status'] == "true"));
+    for (var i = 0; i < userMap.length; i++) {
+      newList.add(Event(
+          userMap[i]['link'] as String,
+          userMap[i]['name'] as String,
+          userMap[i]['creator'] as String,
+          userMap[i]['description'] as String,
+          DateTime.parse(userMap[i]['date'] as String),
+          userMap[i]['location'] as String,
+          int.parse(userMap[i]['minNum'] as String),
+          userMap[0]['status'] == "true"));
     }
     return newList;
   }
@@ -90,9 +99,16 @@ class LocalData implements IlocalData {
     String stringJsonFormat = jsonEncode(respondedEventsList);
     print(stringJsonFormat);
     JsonHandler().saveRespondedEvents(stringJsonFormat);*/
-    String stringJsonFormat = await JsonHandler().readRespondedEvents();
-    List userMap = jsonDecode(stringJsonFormat) as List;
-    respondedEventsList = _convertDynamicListToEventList(userMap);
+    try {
+      String stringJsonFormat = await JsonHandler().readRespondedEvents();
+      List userMap = jsonDecode(stringJsonFormat) as List;
+      respondedEventsList = _convertDynamicListToEventList(userMap);
+    }
+    catch(exception)
+    {
+      // If the file doesn't exist, there aren't any respondedEvents. So, return an empty list.
+      print("Responded file: Couldn't read this file");
+    }
     return respondedEventsList;
   }
 
@@ -110,5 +126,4 @@ class LocalData implements IlocalData {
   String getDefaultName() {
     return defaultName;
   }
-
 }
