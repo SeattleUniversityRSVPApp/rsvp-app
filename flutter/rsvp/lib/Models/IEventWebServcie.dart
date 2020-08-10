@@ -7,4 +7,6 @@ abstract class IEventWebService {
   bool editEvent();
 
   Event getEvent(String link);
+
+  bool joinEvent(String link, String name);
 }
