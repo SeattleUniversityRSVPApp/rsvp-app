@@ -50,4 +50,10 @@ class MockEventService implements IEventWebService {
   bool editEvent() {
     return false;
   }
+
+  @override
+  bool joinEvent(String link, String name) {
+    // TODO: implement joinEvent
+    throw UnimplementedError();
+  }
 }
