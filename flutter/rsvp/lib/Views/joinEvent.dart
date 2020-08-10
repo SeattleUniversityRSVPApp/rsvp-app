@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rsvp/ViewModels/JoinEventViewModel.dart';
 
 class JoinEvent extends StatefulWidget {
   @override
-  JoinEventState createState() => JoinEventState();
+  _JoinEventState createState() => _JoinEventState();
 }
 
-class JoinEventState extends State<JoinEvent> {
-  String eventName;
-  String eventLink;
+class _JoinEventState extends State<JoinEvent> {
+  JoinEventViewModel _joinEventViewModel;
+  String _eventName;
+  String _eventLink;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class JoinEventState extends State<JoinEvent> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 100),
+              SizedBox(height: MediaQuery.of(context).size.height / 6),
               getEventLink(),
-              SizedBox(height: 20),
+              SizedBox(height: MediaQuery.of(context).size.height / 25),
               getEventName(),
-              SizedBox(height: 50),
+              SizedBox(height: MediaQuery.of(context).size.height / 15),
               Container(
                 child: Row (
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,8 +40,9 @@ class JoinEventState extends State<JoinEvent> {
                     ),
                     RaisedButton(
                         child: Text('Join Event'),
-                        onPressed: () async => {
-                          // Go to join event page here?
+                        onPressed: () => {
+                          // how to make _joinEventViewModel not null here?
+                          _joinEventViewModel.joinEvent(_eventLink, _eventName),
                           Navigator.pop(context),
                         }
                     ),
@@ -56,11 +59,11 @@ class JoinEventState extends State<JoinEvent> {
   Row getEventLink() {
     return Row(
       children: <Widget>[
-        SizedBox(width: 75),
+        SizedBox(width: MediaQuery.of(context).size.width / 5),
         Text('Event Link: '),
-        SizedBox(width: 5),
+        SizedBox(width: 10),
         Container(
-          width: 200,
+          width: MediaQuery.of(context).size.width / 3,
           child: TextField (
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -68,12 +71,12 @@ class JoinEventState extends State<JoinEvent> {
                 hintText: 'Link'),
             onChanged: (String text) {
               setState(() {
-                eventLink = text;
+                _eventLink = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventLink = text;
+                _eventLink = text;
               });
             },
           ),
@@ -85,10 +88,10 @@ class JoinEventState extends State<JoinEvent> {
   Row getEventName() {
     return Row(
       children: <Widget>[
-        SizedBox(width: 70),
+        SizedBox(width: MediaQuery.of(context).size.width / 5),
         Text('Event Name: '),
         Container(
-          width: 200,
+          width: MediaQuery.of(context).size.width / 3,
           child: TextField (
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -96,12 +99,12 @@ class JoinEventState extends State<JoinEvent> {
                 hintText: 'Name'),
             onChanged: (String text) {
               setState(() {
-                eventName = text;
+                _eventName = text;
               });
             },
             onSubmitted: (String text) {
               setState(() {
-                eventName = text;
+                _eventName = text;
               });
             },
           ),
@@ -109,4 +112,13 @@ class JoinEventState extends State<JoinEvent> {
       ],
     );
   }
+
+//  @override
+//  void didChangeDependencies() {
+//    super.didChangeDependencies();
+//    _joinEventViewModel = Provider.of<JoinEventViewModel>(context);
+//  }
+
 }
+
+
