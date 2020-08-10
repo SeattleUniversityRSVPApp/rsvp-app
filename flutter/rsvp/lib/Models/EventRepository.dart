@@ -34,7 +34,13 @@ class EventRepository implements IEventRepository {
 
   @override
   Event joinEvent(String link, String respondentName) {
-    return null;
+    var event = getEvent(link);
+    if(event != null) {
+      _cachedEvents[event.link] =
+          event;
+    }
+    var newRespondent = _eventWebService.joinEvent(link, respondentName);
+
   }
 
   @override
