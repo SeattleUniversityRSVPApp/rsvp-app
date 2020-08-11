@@ -8,6 +8,7 @@ class MockEventService implements IEventWebService {
       MockEventService._internal();
 
   final Map<String, Event> _mockEventTable = <String, Event>{};
+  final Map<String, String> _mockRespondentTable = <String, String>{};
 
   factory MockEventService() {
     return _webServiceSingleton;
@@ -53,7 +54,7 @@ class MockEventService implements IEventWebService {
 
   @override
   bool joinEvent(String link, String name) {
-    // TODO: implement joinEvent
-    throw UnimplementedError();
+    var newRespondent = _mockRespondentTable[link] = name;
+    return true;
   }
 }
