@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rsvp/Models/EventRepository.dart';
-import 'package:rsvp/Models/MockEventService.dart';
-import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
+import 'package:rsvp/ViewModels/NavDrawerViewModel.dart';
 import 'package:rsvp/Views/createEvent.dart';
 import 'package:rsvp/Views/joinEvent.dart';
 import 'package:rsvp/Views/setting.dart';
 
-class NavDrawer extends StatelessWidget {
-  // TODO: NavDrawerViewModel _navDrawerViewModel;
+class NavDrawer extends StatefulWidget {
+  @override
+  _NavDrawerState createState() => _NavDrawerState();
+}
 
+class _NavDrawerState extends State<NavDrawer> {
+  NavDrawerViewModel _navDrawerViewModel;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,9 +31,7 @@ class NavDrawer extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                    "User's name here",
-                    // TODO: add a new ViewModel class for Navigation Drawer
-                    //_navDrawerViewModel().getName(),
+                    _navDrawerViewModel.getCustomerName().toString(),
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
@@ -74,10 +74,10 @@ class NavDrawer extends StatelessWidget {
     );
   }
 
-// TODO: uncomment this after navDrawerViewModel class is ready!
-//  @override
-//  void didChangeDependencies() {
-//    super.didChangeDependencies();
-//    _navDrawerViewModel = Provider.of<NavDrawerViewModel>(context);
-//  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _navDrawerViewModel = Provider.of<NavDrawerViewModel>(context);
+
+  }
 }

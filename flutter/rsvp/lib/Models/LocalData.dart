@@ -7,51 +7,24 @@ import 'JsonHandler.dart';
 class LocalData implements IlocalData {
   static List<Event> createdEventsList = [];
   static List<Event> respondedEventsList = [];
-  String defaultName = null;
-  String userId;
+  String _defaultName = null;
+  String _userId;
 
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
-    String stringJsonFormat = jsonEncode(createdEventsList);
+    var stringJsonFormat = jsonEncode(createdEventsList);
     print(stringJsonFormat);
     JsonHandler().saveCreatedEvents(stringJsonFormat);
+    // TODO: this method should return something to show addCreatedEvents is done or not.
     return null;
   }
 
   @override
   Future<List<Event>> getCreatedEvents() async {
-    /// To Test Created Events
-    /*var eventIdCounter = 1;
-    if (createdEventsList.isEmpty) {
-      // TODO: Move this to a MockLocalData class instead
-      createdEventsList = [
-        Event(
-            _urlTemplate + (eventIdCounter++).toString(),
-            'Walk with dogs',
-            '',
-            '',
-            DateTime.parse('2020-08-16'),
-            '',
-            0,
-            true),
-        Event(
-            _urlTemplate + (eventIdCounter++).toString(),
-            'Finish this project',
-            '',
-            '',
-            DateTime.parse('2020-09-08'),
-            '',
-            0,
-            true),
-      ];
-    }
-    String stringJsonFormat2 = jsonEncode(createdEventsList);
-    print(stringJsonFormat2);
-    JsonHandler().saveCreatedEvents(stringJsonFormat2);*/
     try {
-      String stringJsonFormat = await JsonHandler().readCreatedEvents();
-      List userMap = jsonDecode(stringJsonFormat) as List;
+      var stringJsonFormat = await JsonHandler().readCreatedEvents();
+      var userMap = jsonDecode(stringJsonFormat) as List;
       createdEventsList = _convertDynamicListToEventList(userMap);
     } catch (exception) {
       // If the file doesn't exist, there aren't any createdEvents. So, return an empty list.
@@ -86,22 +59,9 @@ class LocalData implements IlocalData {
 
   @override
   Future<List<Event>> getRespondedEvents() async {
-    /// To Test Responded Events
-    /*var eventIdCounter = 3;
-    respondedEventsList = [
-      Event(_urlTemplate + (eventIdCounter++).toString(), 'Visit Museum', '',
-          '', DateTime.parse('2020-10-28'), '', 0, true),
-      Event(_urlTemplate + (eventIdCounter++).toString(), 'Find internship', '',
-          '', DateTime.parse('2020-11-17'), '', 0, true),
-      Event(_urlTemplate + (eventIdCounter++).toString(), 'Party Night', '', '',
-          DateTime.parse('2020-12-31'), '', 0, true),
-    ];
-    String stringJsonFormat = jsonEncode(respondedEventsList);
-    print(stringJsonFormat);
-    JsonHandler().saveRespondedEvents(stringJsonFormat);*/
     try {
-      String stringJsonFormat = await JsonHandler().readRespondedEvents();
-      List userMap = jsonDecode(stringJsonFormat) as List;
+      var stringJsonFormat = await JsonHandler().readRespondedEvents();
+      var userMap = jsonDecode(stringJsonFormat) as List;
       respondedEventsList = _convertDynamicListToEventList(userMap);
     }
     catch(exception)
@@ -118,12 +78,12 @@ class LocalData implements IlocalData {
 
   @override
   bool changeDefaultName(String name) {
-    defaultName = name;
+    _defaultName = name;
     return true;
   }
 
   @override
   String getDefaultName() {
-    return defaultName;
+    return _defaultName;
   }
 }

@@ -6,6 +6,7 @@ import 'package:rsvp/Models/MockLocalData.dart';
 import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
 import 'package:rsvp/ViewModels/JoinEventViewModel.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
+import 'package:rsvp/ViewModels/NavDrawerViewModel.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
 import 'package:rsvp/Views/home.dart';
 
@@ -28,10 +29,10 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => JoinEventViewModel(repository),
       ),
-      //TODO: add a ChangeNotifierProvider for NavDrawerViewModel.
       ChangeNotifierProvider(
         create: (_) => SettingsViewModel(repository),
-      )
+      ),
+      ChangeNotifierProvider(create: (_) => NavDrawerViewModel(repository),)
     ],
     child: MyApp(),
   ));
