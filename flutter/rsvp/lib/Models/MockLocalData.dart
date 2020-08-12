@@ -4,15 +4,15 @@ import 'package:rsvp/Models/ILocalData.dart';
 import 'event.dart';
 
 class MockLocalData extends IlocalData {
-  List<Event> _createdEvents = [
+  final List<Event> _createdEvents = [
     FakeData.fakeEventData[1],
     FakeData.fakeEventData[2],
   ];
-  List<Event> _respondedEvents = [
+  final List<Event> _respondedEvents = [
     FakeData.fakeEventData[4],
     FakeData.fakeEventData[5],
   ];
-  String _defaultName = "Unknown";
+  String _defaultName = 'Unknown';
 
   @override
   Future<List<Event>> getCreatedEvents() {
@@ -22,6 +22,8 @@ class MockLocalData extends IlocalData {
   @override
   String addCreatedEvents(Event newEvent) {
     _createdEvents.add(newEvent);
+    // TODO: add a return value for this method.
+    return '';
   }
 
   @override
@@ -38,6 +40,8 @@ class MockLocalData extends IlocalData {
   @override
   String addRespondedEvent(Event newEvent) {
     _respondedEvents.add(newEvent);
+    // TODO: add a return value for this method.
+    return '';
   }
 
   @override
