@@ -7,6 +7,7 @@ class Event {
   String _location;
   int _minNum;
   bool _status;
+  bool _isCreatedEvent;
 
   Map toJson() => {
     'link': _link,
@@ -17,12 +18,14 @@ class Event {
     'location': _location,
     'minNum': minNum.toString(),
     'status': status.toString(),
+    'isCreatedEvent' : isCreatedEvent.toString(),
   };
 
   factory Event.fromJson(dynamic json) {
     return Event(json['link'] as String, json['name'] as String, json['creator'] as String,
         json['description'] as String, DateTime.parse(json['date'] as String),
-        json['location'] as String, json['minNum'] as int, json['status'] as bool);
+        json['location'] as String, json['minNum'] as int, json['status'] as bool,
+        json['isCreatedEvent'] as bool);
   }
 
   Event(
@@ -33,7 +36,8 @@ class Event {
       DateTime dateTime,
       String location,
       int minNum,
-      bool status) {
+      bool status,
+      bool isCreatedEvent) {
     _link = link;
     _name = name;
     _creator = creator;
@@ -42,6 +46,7 @@ class Event {
     _location = location;
     _minNum = minNum;
     _status = status;
+    _isCreatedEvent = isCreatedEvent;
   }
 
   String get link => _link;
@@ -59,6 +64,12 @@ class Event {
   bool get status => _status;
 
   String get description => _description;
+
+  bool get isCreatedEvent => _isCreatedEvent;
+
+  set isCreatedEvent(bool value) {
+    _isCreatedEvent = value;
+  }
 
   set description(String value) {
     _description = value;

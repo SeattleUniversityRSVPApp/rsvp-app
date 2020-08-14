@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/Models/event.dart';
 import 'package:rsvp/ViewModels/EventViewModel.dart';
 
-class EventDetails extends StatelessWidget {
+class EventDetailsRespondent extends StatelessWidget {
   final EventViewModel event;
   final Function delete;
 
-  EventDetails({this.event, this.delete});
+  EventDetailsRespondent({this.event, this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class EventDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              Text('I created!!'),
+              Text('Someone created!!'),
             ],
           ),
         ),

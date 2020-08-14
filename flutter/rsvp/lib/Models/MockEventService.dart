@@ -5,7 +5,7 @@ import 'event.dart';
 
 class MockEventService implements IEventWebService {
   static final MockEventService _webServiceSingleton =
-      MockEventService._internal();
+  MockEventService._internal();
 
   final Map<String, Event> _mockEventTable = <String, Event>{};
   final Map<String, String> _mockRespondentTable = <String, String>{};
@@ -36,6 +36,7 @@ class MockEventService implements IEventWebService {
         eventDate,
         eventLocation,
         minNum,
+        true,
         true);
     _mockEventTable[newEvent.link] = newEvent;
     // If unsuccessful to create a new event, return ull;

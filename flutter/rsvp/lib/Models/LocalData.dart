@@ -13,6 +13,7 @@ class LocalData implements IlocalData {
   @override
   String addCreatedEvents(Event newEvent) {
     createdEventsList.add(newEvent);
+    print(newEvent.link);
     var stringJsonFormat = jsonEncode(createdEventsList);
     print(stringJsonFormat);
     JsonHandler().saveCreatedEvents(stringJsonFormat);
@@ -44,7 +45,8 @@ class LocalData implements IlocalData {
           DateTime.parse(userMap[i]['date'] as String),
           userMap[i]['location'] as String,
           int.parse(userMap[i]['minNum'] as String),
-          userMap[0]['status'] == "true"));
+          userMap[i]['status'] == 'true',
+          userMap[i]['isCreatedEvent'] == 'true'));
     }
     return newList;
   }

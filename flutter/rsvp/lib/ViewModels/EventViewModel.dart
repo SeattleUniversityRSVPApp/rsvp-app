@@ -17,6 +17,8 @@ class EventViewModel {
 
   int get minNum => _event.minNum;
 
+  bool get isCreatedEvent => _event.isCreatedEvent;
+
   // TODO: (Remove this later) use this link to learn how to format date and time: https://medium.com/flutter-community/working-with-dates-in-dart-e81c70911811 this part: Extracting / parsing date in specific format
   // date is a computed property.
   String get date {

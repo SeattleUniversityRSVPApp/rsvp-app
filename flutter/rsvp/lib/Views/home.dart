@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
+import 'package:rsvp/Views/eventDetailsRespondent.dart';
 import 'package:rsvp/Views/navDrawer.dart';
 import 'package:rsvp/Views/eventDetails.dart';
 import 'package:rsvp/Models/event.dart';
@@ -46,24 +47,39 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       children: _MyEventsViewModelObj.events
           .map((anEvent) => ListTile(
-                title: Text(anEvent.name),
-                subtitle: Text(anEvent.date),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EventDetails(
-                                event: anEvent,
-                                delete: () {
-                                  // TODO: add a delete function in MyEventsViewModel and call it here
+        title: Text(anEvent.name),
+        subtitle: Text(anEvent.date),
+        trailing: Icon(Icons.keyboard_arrow_right),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    if(anEvent.isCreatedEvent == true) {
+                      return EventDetails(
+                        event: anEvent,
+                        delete: () {
+                          // TODO: add a delete function in MyEventsViewModel and call it here
 //                                  setState(() =>
 //                                    _events.remove(anEvent)
 //                                  );
-                                },
-                              )));
-                },
-              ))
+                        },
+                      );
+                    } else {
+                      return EventDetailsRespondent(
+                        event: anEvent,
+                        delete: () {
+                          // TODO: add a delete function in MyEventsViewModel and call it here
+//                                  setState(() =>
+//                                    _events.remove(anEvent)
+//                                  );
+                        },
+                      );
+                    }
+                  }
+              ));
+        },
+      ))
           .toList(),
     );
   }
