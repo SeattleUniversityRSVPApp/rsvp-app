@@ -7,12 +7,13 @@ class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel(this._eventRepositoryObj);
 
   bool save(String name) {
-    _eventRepositoryObj.setCustomerName(name);
+    _eventRepositoryObj.setUserName(name);
+    _eventRepositoryObj.addChangeUserNameListener(() => notifyListeners());
     // TODO: if an exception thrown by the repository or something happened, so the name didn't save, this method should return false. Otherwise return true.
     return true;
   }
 
-  String getName() {
-    return _eventRepositoryObj.getCustomerName();
+  Future<String> getName() {
+    return _eventRepositoryObj.getUserName();
   }
 }
