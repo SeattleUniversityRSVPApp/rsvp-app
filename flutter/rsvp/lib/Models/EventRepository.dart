@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
 import 'package:rsvp/Models/ILocalData.dart';
+
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
   IlocalData _localDataObj = null;
 
   final Map<String, Event> _cachedEvents = <String, Event>{};
-  IEventWebService _eventWebService;
+  final IEventWebService _eventWebService;
   List<VoidCallback> _myEventsListeners = [];
+  List<VoidCallback> _userNameListeners = [];
 
   EventRepository(this._eventWebService, this._localDataObj);
 
@@ -36,7 +38,7 @@ class EventRepository implements IEventRepository {
   Event joinEvent(String link, String respondentName) {
     var event = getEvent(link);
 
-    if(event == null) {
+    if (event == null) {
       return null;
     }
 
@@ -52,7 +54,8 @@ class EventRepository implements IEventRepository {
 
   @override
   Future<List<Event>> getMyEvents() async {
-    return await _localDataObj.getCreatedEvents() + await _localDataObj.getRespondedEvents();
+    return await _localDataObj.getCreatedEvents() +
+        await _localDataObj.getRespondedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
@@ -74,17 +77,26 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  String getCustomerName() {
+  Future<String> getUserName() {
     return _localDataObj.getDefaultName();
   }
 
   @override
-  bool setCustomerName(String name) {
-    return _localDataObj.changeDefaultName(name);
+  bool setUserName(String name) {
+    var isSuccessful = _localDataObj.changeDefaultName(name);
+    for (var listener in _userNameListeners) {
+      listener.call();
+    }
+    return isSuccessful;
   }
 
   @override
   void addMyEventsListener(VoidCallback listener) {
     _myEventsListeners.add(listener);
+  }
+
+  @override
+  void addChangeUserNameListener(VoidCallback listener) {
+    _userNameListeners.add(listener);
   }
 }

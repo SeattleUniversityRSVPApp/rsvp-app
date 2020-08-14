@@ -33,8 +33,8 @@ class MockLocalData extends IlocalData {
   }
 
   @override
-  String getDefaultName() {
-    return _defaultName;
+  Future<String> getDefaultName() {
+    return Future.value(_defaultName);
   }
 
   @override

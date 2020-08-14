@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 
 class NavDrawerViewModel extends ChangeNotifier {
-  String _customerName;
+  String _userName;
   final IEventRepository _repository;
 
   NavDrawerViewModel(this._repository);
 
-  getCustomerName() {
-    _customerName = _repository.getCustomerName();
-    return (_customerName != null && _customerName.isNotEmpty)
-        ? _customerName
-        : 'Unknown';
+  String get userName => _userName;
+
+  Future onLoad() async
+  {
+    _userName = await _repository.getUserName();
+    _repository.addChangeUserNameListener(() => notifyListeners());
   }
 }

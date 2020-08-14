@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:rsvp/Models/event.dart';
+
 import 'ILocalData.dart';
 import 'JsonHandler.dart';
 
 class LocalData implements IlocalData {
   static List<Event> createdEventsList = [];
   static List<Event> respondedEventsList = [];
-  String _defaultName = null;
+  String _defaultName = 'Unknown';
   String _userId;
 
   @override
@@ -78,12 +80,27 @@ class LocalData implements IlocalData {
 
   @override
   bool changeDefaultName(String name) {
+    try {
+      JsonHandler().saveUserName(name);
+    }
+    catch (exception){
+      print('Could not save user name in file.');
+      return false;
+    }
     _defaultName = name;
     return true;
   }
 
   @override
-  String getDefaultName() {
+  Future<String> getDefaultName() async {
+    try{
+      _defaultName = await JsonHandler().readUserName();
+    }
+    catch (exception)
+    {
+      print('Could not read user name from file');
+      print(exception.toString());
+    }
     return _defaultName;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
-import 'loading.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -40,15 +39,6 @@ class _SettingState extends State<Setting> {
     );
   }
 
-  void reload() {
-    runApp(MaterialApp(
-      initialRoute: '/loading',
-      routes: {
-        '/loading': (context) => Loading(),
-      },
-    ));
-  }
-
   Row _getName() {
     return Row(
       children: <Widget>[
@@ -74,9 +64,9 @@ class _SettingState extends State<Setting> {
   }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
     _settingViewModel = Provider.of<SettingsViewModel>(context);
-    _name = _settingViewModel.getName();
+    _name = await _settingViewModel.getName();
   }
 }

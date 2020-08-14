@@ -12,6 +12,7 @@ class NavDrawer extends StatefulWidget {
 
 class _NavDrawerState extends State<NavDrawer> {
   NavDrawerViewModel _navDrawerViewModel;
+  Future _viewModelLoadedFuture;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,11 +31,12 @@ class _NavDrawerState extends State<NavDrawer> {
                   SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    _navDrawerViewModel.getCustomerName().toString(),
+
+                  FutureBuilder(future: _viewModelLoadedFuture,
+                    builder: (context, snapshot)  => Text(_navDrawerViewModel.userName,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                ],
+                  )],
               ),
             ),
             decoration: BoxDecoration(
@@ -75,9 +77,9 @@ class _NavDrawerState extends State<NavDrawer> {
   }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies(){
     super.didChangeDependencies();
     _navDrawerViewModel = Provider.of<NavDrawerViewModel>(context);
-
+    _viewModelLoadedFuture = _navDrawerViewModel.onLoad();
   }
 }

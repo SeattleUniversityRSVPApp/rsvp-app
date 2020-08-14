@@ -16,10 +16,11 @@ abstract class IEventRepository {
 
   Event joinEvent(String link, String respondentName);
 
-  String getCustomerName();
+  Future<String> getUserName();
 
-  bool setCustomerName(String name);
+  bool setUserName(String name);
 
   void addMyEventsListener(VoidCallback listener);
 
+  void addChangeUserNameListener(VoidCallback listener);
 }
