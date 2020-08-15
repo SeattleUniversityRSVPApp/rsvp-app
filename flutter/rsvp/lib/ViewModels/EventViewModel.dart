@@ -3,9 +3,16 @@ import 'package:intl/intl.dart';
 
 class EventViewModel {
   Event _event;
+  bool _isCreated;
 
   //the page viemodel gets events from repository and generate one eventViewModel for each event
-  EventViewModel(this._event);
+  EventViewModel(this._event, this._isCreated);
+
+  set isCreated(bool value) {
+    _isCreated = value;
+  }
+
+  bool get isCreated => _isCreated;
 
   String get link => _event.link;
 

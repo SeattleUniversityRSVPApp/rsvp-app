@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
 import 'package:rsvp/Models/ILocalData.dart';
-
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
@@ -53,7 +52,14 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  Future<List<Event>> getMyEvents() async {
+  Future<List<Event>> getCreatedEvents() async {
+    return await _localDataObj.getCreatedEvents() +
+        await _localDataObj.getRespondedEvents();
+    // TODO:  get latest updated events from service, and also store in-memory cache.
+  }
+
+  @override
+  Future<List<Event>> getRespondentEvents() async {
     return await _localDataObj.getCreatedEvents() +
         await _localDataObj.getRespondedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.

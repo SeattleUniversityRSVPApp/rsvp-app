@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'event.dart';
 
 abstract class IEventRepository {
@@ -10,7 +9,9 @@ abstract class IEventRepository {
 
   Event getEvent(String link);
 
-  Future<List<Event>> getMyEvents();
+  Future<List<Event>> getCreatedEvents();
+
+  Future<List<Event>> getRespondentEvents();
 
   Event cancelEvent(String link);
 
