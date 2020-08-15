@@ -53,10 +53,20 @@ class EventDetails extends StatelessWidget {
                   ),
                 ],
               ),
+              testFunction(),
             ],
           ),
         ),
       ),
     );
   }
+
+  Widget testFunction() {
+    if(event.isCreated) {
+      return Text("Created Events");
+    } else {
+      return Text("Respondent Events");
+    }
+  }
+
 }
