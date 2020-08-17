@@ -11,6 +11,7 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
   CreateEventViewModel _createEventViewModel;
   String _eventName;
+  String _creatorName;
   String _eventDate;
   int _minNum;
   String _eventDescription;
@@ -28,6 +29,7 @@ class _CreateEventState extends State<CreateEvent> {
           child: Column(
             children: <Widget>[
               getEventName(),
+              getCreatorName(),
               getEventDate(),
               getMinNum(),
               getEventDescription(),
@@ -37,6 +39,7 @@ class _CreateEventState extends State<CreateEvent> {
                   onPressed: () => {
                         _createEventViewModel.createEvent(
                             _eventName,
+                            _creatorName,
                             _eventDate.substring(0, _eventDate.length-1),
                             _minNum,
                             _eventDescription,
@@ -66,6 +69,31 @@ class _CreateEventState extends State<CreateEvent> {
             onSubmitted: (String text) {
               setState(() {
                 _eventName = text;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row getCreatorName() {
+    return Row(
+      children: <Widget>[
+        Text('Creator name: '),
+        Container(
+          width: 200,
+          child: TextFormField(
+            initialValue: _createEventViewModel.getUsername(),
+            decoration: InputDecoration.collapsed(hintText: 'Name'),
+            onChanged: (String text) {
+              setState(() {
+                _creatorName = text;
+              });
+            },
+            onSaved: (String text) {
+              setState(() {
+                _creatorName = text;
               });
             },
           ),
@@ -177,5 +205,6 @@ class _CreateEventState extends State<CreateEvent> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _createEventViewModel = Provider.of<CreateEventViewModel>(context);
+    _creatorName = _createEventViewModel.getUsername();
   }
 }

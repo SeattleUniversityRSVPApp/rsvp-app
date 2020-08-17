@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:rsvp/Models/event.dart';
-
 import 'ILocalData.dart';
 import 'JsonHandler.dart';
 
@@ -101,6 +99,11 @@ class LocalData implements IlocalData {
       print('Could not read user name from file');
       print(exception.toString());
     }
+    return _defaultName;
+  }
+
+  @override
+  String getDefaultNameFromLocal() {
     return _defaultName;
   }
 }

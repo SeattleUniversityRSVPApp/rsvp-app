@@ -1,6 +1,5 @@
 import 'package:rsvp/Models/FakeData.dart';
 import 'package:rsvp/Models/ILocalData.dart';
-
 import 'event.dart';
 
 class MockLocalData extends IlocalData {
@@ -35,6 +34,10 @@ class MockLocalData extends IlocalData {
   @override
   Future<String> getDefaultName() {
     return Future.value(_defaultName);
+  }
+
+  String getDefaultNameFromLocal() {
+    return _defaultName;
   }
 
   @override
