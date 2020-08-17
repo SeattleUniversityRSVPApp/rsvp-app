@@ -26,12 +26,12 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  Event createEvent(String eventName, DateTime eventDate, int minNum,
+  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
       String eventDescription, String eventLocation) {
     var newEvent = Event(
         FakeData.urlTemplate + (FakeData.eventIdCounter++).toString(),
         eventName,
-        '',
+        creatorName,
         eventDescription,
         eventDate,
         eventLocation,

@@ -8,5 +8,6 @@ abstract class IlocalData {
   Future<List<Event>> getRespondedEvents();
   String addRespondedEvent(Event newEvent);
   Future<String> getDefaultName();
+  String getDefaultNameFromLocal();
   bool changeDefaultName(String name);
 }

@@ -15,10 +15,10 @@ class EventRepository implements IEventRepository {
   EventRepository(this._eventWebService, this._localDataObj);
 
   @override
-  Event createEvent(String eventName, DateTime eventDate, int minNum,
+  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
       String eventDescription, String eventLocation) {
     var aNewEvent = _eventWebService.createEvent(
-        eventName, eventDate, minNum, eventDescription, eventLocation);
+        eventName, creatorName, eventDate, minNum, eventDescription, eventLocation);
     if (aNewEvent != null) {
       _localDataObj.addCreatedEvents(aNewEvent);
 
@@ -85,6 +85,11 @@ class EventRepository implements IEventRepository {
   @override
   Future<String> getUserName() {
     return _localDataObj.getDefaultName();
+  }
+
+  @override
+  String getUserNameFromLocal() {
+    return _localDataObj.getDefaultNameFromLocal();
   }
 
   @override

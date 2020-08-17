@@ -8,9 +8,9 @@ class JoinEvent extends StatefulWidget {
 }
 
 class _JoinEventState extends State<JoinEvent> {
-//  var _joinEventViewModel = JoinEventViewModel();
   JoinEventViewModel _joinEventViewModel;
   String _eventLink;
+  String _userName;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _JoinEventState extends State<JoinEvent> {
                         child: Text('Join Event'),
                         onPressed: () => {
                               joined =
-                                  _joinEventViewModel.joinEvent(_eventLink),
+                                  _joinEventViewModel.joinEvent(_eventLink, _userName),
                               showAlertDialog(context, joined),
                             }),
                   ],
@@ -85,36 +85,40 @@ class _JoinEventState extends State<JoinEvent> {
     );
   }
 
-  Widget getUserName() {
-    return FutureBuilder(
-        future: _joinEventViewModel.getUsername(),
-        builder: (context, userName) => Row(
-              children: <Widget>[
-                SizedBox(width: MediaQuery.of(context).size.width / 5),
-                Text('User Name: '),
-                Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: TextFormField(
-                    initialValue: userName.data as String,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        hintText: 'Name'),
-                    onChanged: (text) {
-                      setState(() {
-                        _joinEventViewModel.setUsername(text);
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ));
+  Row getUserName() {
+    return Row(
+      children: <Widget>[
+        SizedBox(width: MediaQuery.of(context).size.width / 5),
+        Text('User Name: '),
+        Container(
+          width: MediaQuery.of(context).size.width / 3,
+          child: TextFormField(
+            initialValue: _joinEventViewModel.getUsername(),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)),
+                hintText: 'Name'),
+            onChanged: (text) {
+              setState(() {
+                _userName = text;
+              });
+            },
+            onSaved: (String text) {
+              setState(() {
+                _userName = text;
+              });
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _joinEventViewModel = Provider.of<JoinEventViewModel>(context);
+    _userName = _joinEventViewModel.getUsername();
   }
 }
 

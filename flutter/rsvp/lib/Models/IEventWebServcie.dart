@@ -1,7 +1,7 @@
 import 'event.dart';
 
 abstract class IEventWebService {
-  Event createEvent(String eventName, DateTime eventDate, int minNum,
+  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
       String eventDescription, String eventLocation);
 
   bool editEvent();
