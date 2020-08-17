@@ -8,8 +8,8 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-  String _name;
   SettingsViewModel _settingViewModel;
+  Future _viewModelLoadedFuture;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,9 @@ class _SettingState extends State<Setting> {
               _getName(),
               RaisedButton(
                   child: Text('Save'),
+                  //This async doesn't work here! It doesn't have any await inside the onPressed method.
                   onPressed: () async => {
-                        _settingViewModel.save(_name),
+                        _settingViewModel.save(),
                         //reload(),
                         Navigator.pop(context),
                       })
@@ -45,28 +46,27 @@ class _SettingState extends State<Setting> {
         Text(' Enter Name: '),
         Container(
           width: 200,
-          child: TextField(
-            decoration: InputDecoration.collapsed(hintText: ' type your name '),
-            onChanged: (String text) {
-              setState(() {
-                _name = text;
-              });
-            },
-            onSubmitted: (String text) {
-              setState(() {
-                _name = text;
-              });
-            },
+          child: FutureBuilder(future: _viewModelLoadedFuture, builder: (context,snapshot) =>
+            TextField(decoration: InputDecoration.collapsed(hintText: _settingViewModel.userName),
+              onChanged: (String text)
+              {
+                _settingViewModel.userName = text;
+              },
+              onSubmitted: (String text)
+              {
+                _settingViewModel.userName = text;
+              },
           ),
+         ),
         ),
       ],
     );
   }
 
   @override
-  void didChangeDependencies() async {
+  void didChangeDependencies(){
     super.didChangeDependencies();
     _settingViewModel = Provider.of<SettingsViewModel>(context);
-    _name = await _settingViewModel.getName();
+    _viewModelLoadedFuture = _settingViewModel.onLoad();
   }
 }
