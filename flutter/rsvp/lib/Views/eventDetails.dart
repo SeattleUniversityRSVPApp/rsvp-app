@@ -28,17 +28,29 @@ class EventDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               getEventName(),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               getCreatorName(),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               getMinNum(),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               getLocation(),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               getDescription(),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               CreatedOrRespondent(context),
             ],
           ),
@@ -65,7 +77,6 @@ class EventDetails extends StatelessWidget {
             color: Colors.grey[800],
           ),
         ),
-
       ],
     );
   }
@@ -88,7 +99,6 @@ class EventDetails extends StatelessWidget {
             color: Colors.grey[800],
           ),
         ),
-
       ],
     );
   }
@@ -111,7 +121,6 @@ class EventDetails extends StatelessWidget {
             color: Colors.grey[800],
           ),
         ),
-
       ],
     );
   }
@@ -134,7 +143,6 @@ class EventDetails extends StatelessWidget {
             color: Colors.grey[800],
           ),
         ),
-
       ],
     );
   }
@@ -157,14 +165,46 @@ class EventDetails extends StatelessWidget {
             color: Colors.grey[800],
           ),
         ),
-
       ],
     );
   }
 
   Widget CreatedOrRespondent(BuildContext context) {
-    if(event.isCreated) {
-      return Text("Created Events");
+    if (event.isCreated) {
+      return Row(
+        children: <Widget>[
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: FlatButton.icon(
+                onPressed: () async {
+//                  await delete();
+                },
+                icon: Icon(
+                  Icons.create,
+                  color: Colors.green,
+                ),
+                label: Text('Edit'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FlatButton.icon(
+                onPressed: () async {
+//                  await delete();
+                },
+                icon: Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                ),
+                label: Text('Cancel'),
+              ),
+            ),
+          ),
+        ],
+      );
     } else {
       return Row(
         children: <Widget>[
@@ -175,7 +215,10 @@ class EventDetails extends StatelessWidget {
                 onPressed: () async {
 //                  await delete();
                 },
-                icon: Icon(Icons.check_circle, color: Colors.green,),
+                icon: Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                ),
                 label: Text('Join'),
               ),
             ),
@@ -187,7 +230,10 @@ class EventDetails extends StatelessWidget {
                 onPressed: () async {
 //                  await delete();
                 },
-                icon: Icon(Icons.cancel, color: Colors.red,),
+                icon: Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                ),
                 label: Text('Absent'),
               ),
             ),
@@ -209,7 +255,4 @@ class EventDetails extends StatelessWidget {
       );
     }
   }
-
 }
-
-
