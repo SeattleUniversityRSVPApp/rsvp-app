@@ -10,11 +10,12 @@ import 'package:rsvp/ViewModels/SettingsViewModel.dart';
 import 'package:rsvp/Views/home.dart';
 
 import 'Models/LocalData.dart';
+import 'Models/MockLocalData.dart';
 import 'Models/event.dart';
 
 void main() {
-  //var localData = MockLocalData(); // Uncomment to use fake data
-  var localData = LocalData();  // Uncomment to use real local data
+  var localData = MockLocalData(); // Uncomment to use fake data
+//  var localData = LocalData();  // Uncomment to use real local data
   var repository = EventRepository(MockEventService(), localData);
   runApp(MultiProvider(
     providers: [
