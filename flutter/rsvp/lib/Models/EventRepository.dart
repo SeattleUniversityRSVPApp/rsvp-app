@@ -53,15 +53,13 @@ class EventRepository implements IEventRepository {
 
   @override
   Future<List<Event>> getCreatedEvents() async {
-    return await _localDataObj.getCreatedEvents() +
-        await _localDataObj.getRespondedEvents();
+    return await _localDataObj.getCreatedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
   @override
   Future<List<Event>> getRespondentEvents() async {
-    return await _localDataObj.getCreatedEvents() +
-        await _localDataObj.getRespondedEvents();
+    return await _localDataObj.getRespondedEvents();
     // TODO:  get latest updated events from service, and also store in-memory cache.
   }
 
