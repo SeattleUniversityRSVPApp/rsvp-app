@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
-import 'package:rsvp/Models/event.dart';
 
 class EventDetailsViewModel extends ChangeNotifier {
-  IEventRepository repositoryObj;
-  EventDetailsViewModel(this.repositoryObj);
+  IEventRepository _repositoryObj;
+  EventDetailsViewModel(this._repositoryObj);
 
   bool cancelEvent(String link) {
-    var canceledEvent = repositoryObj.cancelEvent(link);
+    var canceledEvent = _repositoryObj.cancelEvent(link);
     if (canceledEvent == null) {
       return false;
     } else {
@@ -16,11 +15,16 @@ class EventDetailsViewModel extends ChangeNotifier {
   }
 
   bool editEvent(String link, DateTime date, String location) {
-    var editdEvent = repositoryObj.editEvent(link, date, location);
+    var editdEvent = _repositoryObj.editEvent(link, date, location);
     if (editdEvent == null) {
       return false;
     } else {
       return true;
     }
   }
+
+  bool deleteEvent(String link) {
+    return _repositoryObj.deleteEvent(link);
+  }
+
 }

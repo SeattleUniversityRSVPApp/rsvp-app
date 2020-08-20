@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
-import 'package:rsvp/Models/event.dart';
 import 'package:rsvp/ViewModels/EventViewModel.dart';
 
 class MyEventsViewModel extends ChangeNotifier {

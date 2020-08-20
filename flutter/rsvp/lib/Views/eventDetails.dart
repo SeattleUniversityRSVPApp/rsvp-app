@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rsvp/ViewModels/EventDetailsViewModel.dart';
 import 'package:rsvp/ViewModels/EventViewModel.dart';
 
-class EventDetails extends StatelessWidget {
+class EventDetails extends StatefulWidget {
   final EventViewModel event;
   final Function delete;
 
   EventDetails({this.event, this.delete});
+
+  @override
+  _EventDetailsState createState() => _EventDetailsState();
+}
+
+class _EventDetailsState extends State<EventDetails> {
+  EventDetailsViewModel _eventDetailsViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +25,7 @@ class EventDetails extends StatelessWidget {
           backgroundColor: Colors.grey[800],
           centerTitle: true,
           title: Text(
-            event.name,
+            widget.event.name,
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,
@@ -71,7 +80,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         Text(
-          event.date,
+          widget.event.date,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[800],
@@ -93,7 +102,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         Text(
-          event.creator,
+          widget.event.creator,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[800],
@@ -115,7 +124,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         Text(
-          event.minNum.toString(),
+          widget.event.minNum.toString(),
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[800],
@@ -137,7 +146,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         Text(
-          event.location,
+          widget.event.location,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[800],
@@ -159,7 +168,7 @@ class EventDetails extends StatelessWidget {
           ),
         ),
         Text(
-          event.description,
+          widget.event.description,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey[800],
@@ -170,7 +179,7 @@ class EventDetails extends StatelessWidget {
   }
 
   Widget CreatedOrRespondent(BuildContext context) {
-    if (event.isCreated) {
+    if (widget.event.isCreated) {
       return Row(
         children: <Widget>[
           Expanded(
@@ -243,7 +252,8 @@ class EventDetails extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: FlatButton.icon(
                 onPressed: () async {
-                  await delete();
+                  await widget.delete();
+                  await _eventDetailsViewModel.deleteEvent(widget.event.link);
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.delete),
@@ -254,5 +264,11 @@ class EventDetails extends StatelessWidget {
         ],
       );
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _eventDetailsViewModel = Provider.of<EventDetailsViewModel>(context);
   }
 }
