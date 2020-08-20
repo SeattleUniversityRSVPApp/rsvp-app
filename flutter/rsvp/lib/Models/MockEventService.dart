@@ -1,6 +1,5 @@
 import 'package:rsvp/Models/FakeData.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
-
 import 'event.dart';
 
 class MockEventService implements IEventWebService {
@@ -57,4 +56,5 @@ class MockEventService implements IEventWebService {
     var newRespondent = _mockRespondentTable[link] = name;
     return true;
   }
+
 }

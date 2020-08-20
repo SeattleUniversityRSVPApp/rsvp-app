@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/Views/navDrawer.dart';
 import 'package:rsvp/Views/eventDetails.dart';
-import 'package:rsvp/Models/event.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -33,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text("Something went wrong."),
+                child: Text('Something went wrong.'),
               );
             } else {
               return buildListView(context);
@@ -55,12 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       MaterialPageRoute(
                           builder: (context) => EventDetails(
                                 event: anEvent,
-                                delete: () {
-                                  // TODO: add a delete function in MyEventsViewModel and call it here
-//                                  setState(() =>
-//                                    _events.remove(anEvent)
-//                                  );
-                                },
                               )));
                 },
               ))

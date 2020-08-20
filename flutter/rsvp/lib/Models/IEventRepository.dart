@@ -15,6 +15,8 @@ abstract class IEventRepository {
 
   Event cancelEvent(String link);
 
+  bool deleteEvent(String link);
+
   Event joinEvent(String link, String respondentName);
 
   Future<String> getUserName();

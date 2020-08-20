@@ -29,7 +29,6 @@ class EventRepository implements IEventRepository {
         listener.call();
       }
     }
-
     return aNewEvent;
   }
 
@@ -49,6 +48,18 @@ class EventRepository implements IEventRepository {
   @override
   Event cancelEvent(String link) {
     return null;
+  }
+
+  @override
+  bool deleteEvent(String link) {
+    if(_cachedEvents.containsKey(link)) {
+      _cachedEvents.remove(link);
+    }
+    bool isSuccessful = _localDataObj.deleteRespondentEvent(link);
+    for (var listener in _myEventsListeners) {
+      listener.call();
+    }
+    return isSuccessful;
   }
 
   @override

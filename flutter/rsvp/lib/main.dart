@@ -7,6 +7,7 @@ import 'package:rsvp/ViewModels/JoinEventViewModel.dart';
 import 'package:rsvp/ViewModels/MyEventsViewModel.dart';
 import 'package:rsvp/ViewModels/NavDrawerViewModel.dart';
 import 'package:rsvp/ViewModels/SettingsViewModel.dart';
+import 'package:rsvp/ViewModels/EventDetailsViewModel.dart';
 import 'package:rsvp/Views/home.dart';
 
 import 'Models/LocalData.dart';
@@ -14,8 +15,8 @@ import 'Models/MockLocalData.dart';
 import 'Models/event.dart';
 
 void main() {
-  var localData = MockLocalData(); // Uncomment to use fake data
-//  var localData = LocalData();  // Uncomment to use real local data
+//  var localData = MockLocalData(); // Uncomment to use fake data
+  var localData = LocalData();  // Uncomment to use real local data
   var repository = EventRepository(MockEventService(), localData);
   runApp(MultiProvider(
     providers: [
@@ -25,14 +26,18 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => MyEventsViewModel(repository),
       ),
-      //TODO: add a ChangeNotifierProvider for EventDetailsViewModel.
+      ChangeNotifierProvider(
+        create: (_) => EventDetailsViewModel(repository),
+      ),
       ChangeNotifierProvider(
         create: (_) => JoinEventViewModel(repository),
       ),
       ChangeNotifierProvider(
         create: (_) => SettingsViewModel(repository),
       ),
-      ChangeNotifierProvider(create: (_) => NavDrawerViewModel(repository),)
+      ChangeNotifierProvider(
+        create: (_) => NavDrawerViewModel(repository),
+      )
     ],
     child: MyApp(),
   ));
