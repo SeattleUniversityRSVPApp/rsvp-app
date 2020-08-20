@@ -76,16 +76,12 @@ class LocalData implements IlocalData {
 
   @override
   bool deleteRespondentEvent(String link) {
-    print('Target: ' + link);
     for(int i = 0; i < respondedEventsList.length; i++) {
       var targetEvent = respondedEventsList[i];
-      print('Target: ' + respondedEventsList[i].link);
       if(targetEvent.link == link) {
-        print(link + " vs " + respondedEventsList[i].link);
         respondedEventsList.remove(respondedEventsList[i]);
       }
     }
-    print(respondedEventsList);
     return saveRespondentEvents();
   }
 
