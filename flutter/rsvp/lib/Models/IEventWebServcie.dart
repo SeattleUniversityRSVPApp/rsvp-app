@@ -9,4 +9,6 @@ abstract class IEventWebService {
   Event getEvent(String link);
 
   bool joinEvent(String link, String name);
+
+  bool deleteEvent(String link);
 }

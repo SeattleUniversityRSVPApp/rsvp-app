@@ -7,6 +7,7 @@ import 'JsonHandler.dart';
 class LocalData implements IlocalData {
   static List<Event> createdEventsList = [];
   static List<Event> respondedEventsList = [];
+  static var jsonhandler = JsonHandler();
   String _defaultName = 'Unknown';
   String _userId;
 
@@ -15,7 +16,7 @@ class LocalData implements IlocalData {
     createdEventsList.add(newEvent);
     var stringJsonFormat = jsonEncode(createdEventsList);
     print(stringJsonFormat);
-    JsonHandler().saveCreatedEvents(stringJsonFormat);
+    jsonhandler.saveCreatedEvents(stringJsonFormat);
     // TODO: this method should return something to show addCreatedEvents is done or not.
     return null;
   }
@@ -51,16 +52,17 @@ class LocalData implements IlocalData {
 
   @override
   String addRespondedEvent(Event newEvent) {
+    respondedEventsList.add(newEvent);
     String stringJsonFormat = jsonEncode(respondedEventsList);
     print(stringJsonFormat);
-    JsonHandler().saveCreatedEvents(stringJsonFormat);
+    jsonhandler.saveCreatedEvents(stringJsonFormat);
     return null;
   }
 
   @override
   Future<List<Event>> getRespondedEvents() async {
     try {
-      var stringJsonFormat = await JsonHandler().readRespondedEvents();
+      var stringJsonFormat = await jsonhandler.readRespondedEvents();
       var userMap = jsonDecode(stringJsonFormat) as List;
       respondedEventsList = _convertDynamicListToEventList(userMap);
     }
@@ -72,14 +74,38 @@ class LocalData implements IlocalData {
     return respondedEventsList;
   }
 
-  List<String> saveEvents() {
-    return null;
+  @override
+  bool deleteRespondentEvent(String link) {
+    print('Target: ' + link);
+    for(int i = 0; i < respondedEventsList.length; i++) {
+      var targetEvent = respondedEventsList[i];
+      print('Target: ' + respondedEventsList[i].link);
+      if(targetEvent.link == link) {
+        print(link + " vs " + respondedEventsList[i].link);
+        respondedEventsList.remove(respondedEventsList[i]);
+      }
+    }
+    print(respondedEventsList);
+    return saveRespondentEvents();
+  }
+
+  @override
+  bool saveRespondentEvents() {
+    try {
+      String stringJsonFormat = jsonEncode(respondedEventsList);
+      print(stringJsonFormat);
+      jsonhandler.saveRespondedEvents(stringJsonFormat);
+      return true;
+    } catch(exception) {
+      print("Responded file: Couldn't update this file");
+      return false;
+    }
   }
 
   @override
   bool changeDefaultName(String name) {
     try {
-      JsonHandler().saveUserName(name);
+      jsonhandler.saveUserName(name);
     }
     catch (exception){
       print('Could not save user name in file.');
@@ -92,7 +118,7 @@ class LocalData implements IlocalData {
   @override
   Future<String> getDefaultName() async {
     try{
-      _defaultName = await JsonHandler().readUserName();
+      _defaultName = await jsonhandler.readUserName();
     }
     catch (exception)
     {

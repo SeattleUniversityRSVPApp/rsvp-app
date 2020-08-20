@@ -32,6 +32,22 @@ class MockLocalData extends IlocalData {
   }
 
   @override
+  bool deleteRespondentEvent(String link) {
+    for(int i = 0; i < _respondedEvents.length; i++) {
+      var targetEvent = _respondedEvents[i];
+      if(targetEvent.link == link) {
+        _respondedEvents.remove(targetEvent);
+      }
+    }
+    return saveRespondentEvents();
+  }
+
+  @override
+  bool saveRespondentEvents() {
+    return true;
+  }
+
+  @override
   Future<String> getDefaultName() {
     return Future.value(_defaultName);
   }

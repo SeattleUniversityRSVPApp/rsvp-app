@@ -1,12 +1,14 @@
 import 'dart:convert'; //Encoders and decoders for converting between different data representations, including JSON and UTF-8.
 import 'dart:io';
-
 import 'package:path_provider/path_provider.dart';
 
 class JsonHandler {
   void saveCreatedEvents(String stringJsonFormat) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/createdEvents.txt');
+    if (!await file.exists()) {
+      await file.create();
+    }
     await file.writeAsString(stringJsonFormat);
     print('Saved created events to local storage');
   }
@@ -15,12 +17,18 @@ class JsonHandler {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/createdEvents.txt');
     var text = await file.readAsString();
+    if (!await file.exists()) {
+      await file.create();
+    }
     return text;
   }
 
   void saveRespondedEvents(String stringJsonFormat) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/respondedEvents.txt');
+    if (!await file.exists()) {
+      await file.create();
+    }
     await file.writeAsString(stringJsonFormat);
     print('Saved responded events to local storage');
   }
@@ -28,6 +36,9 @@ class JsonHandler {
   Future<String> readRespondedEvents() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/respondedEvents.txt');
+    if (!await file.exists()) {
+      await file.create();
+    }
     var text = await file.readAsString();
     return text;
   }
