@@ -5,9 +5,9 @@ import 'package:rsvp/ViewModels/EventViewModel.dart';
 
 class EventDetails extends StatefulWidget {
   final EventViewModel event;
-  final Function delete;
+//  final Function delete;
 
-  EventDetails({this.event, this.delete});
+  EventDetails({this.event/*, this.delete*/});
 
   @override
   _EventDetailsState createState() => _EventDetailsState();
@@ -252,7 +252,6 @@ class _EventDetailsState extends State<EventDetails> {
               alignment: Alignment.bottomRight,
               child: FlatButton.icon(
                 onPressed: () async {
-                  await widget.delete();
                   await _eventDetailsViewModel.deleteEvent(widget.event.link);
                   Navigator.pop(context);
                 },
