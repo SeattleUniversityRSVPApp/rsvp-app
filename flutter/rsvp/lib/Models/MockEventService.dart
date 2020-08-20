@@ -57,14 +57,4 @@ class MockEventService implements IEventWebService {
     return true;
   }
 
-  @override
-  bool deleteEvent(String link) {
-    if(_mockRespondentTable.containsKey(link)) {
-      _mockRespondentTable.remove(link);
-      return true;
-    } else {
-      return true;
-    }
-  }
-
 }

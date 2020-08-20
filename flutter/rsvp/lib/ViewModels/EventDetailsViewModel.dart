@@ -24,7 +24,9 @@ class EventDetailsViewModel extends ChangeNotifier {
   }
 
   bool deleteEvent(String link) {
-    return _repositoryObj.deleteEvent(link);
+    _repositoryObj.deleteEvent(link);
+    _repositoryObj.addMyEventsListener(() => notifyListeners());
+    return true;
   }
 
 }

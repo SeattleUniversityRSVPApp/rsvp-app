@@ -54,11 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       MaterialPageRoute(
                           builder: (context) => EventDetails(
                                 event: anEvent,
-                                delete: () {
-                                  setState(() =>
-                                      _MyEventsViewModelObj.events.remove(anEvent)
-                                  );
-                                },
                               )));
                 },
               ))
