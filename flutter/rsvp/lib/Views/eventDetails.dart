@@ -7,7 +7,7 @@ class EventDetails extends StatefulWidget {
   final EventViewModel event;
 //  final Function delete;
 
-  EventDetails({this.event/*, this.delete*/});
+  EventDetails({this.event /*, this.delete*/});
 
   @override
   _EventDetailsState createState() => _EventDetailsState();
@@ -202,7 +202,8 @@ class _EventDetailsState extends State<EventDetails> {
               alignment: Alignment.bottomCenter,
               child: FlatButton.icon(
                 onPressed: () async {
-//                  await delete();
+                  await _eventDetailsViewModel.cancelEvent(widget.event.link);
+                  Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.cancel,

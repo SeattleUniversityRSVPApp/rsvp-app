@@ -9,6 +9,8 @@ abstract class IlocalData {
   String addRespondedEvent(Event newEvent);
   bool deleteRespondentEvent(String link);
   bool saveRespondentEvents();
+  bool deleteCreatorEvent(String link);
+  bool saveCreatorEvents();
   Future<String> getDefaultName();
   String getDefaultNameFromLocal();
   bool changeDefaultName(String name);

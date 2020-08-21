@@ -33,9 +33,9 @@ class MockLocalData extends IlocalData {
 
   @override
   bool deleteRespondentEvent(String link) {
-    for(int i = 0; i < _respondedEvents.length; i++) {
+    for (int i = 0; i < _respondedEvents.length; i++) {
       var targetEvent = _respondedEvents[i];
-      if(targetEvent.link == link) {
+      if (targetEvent.link == link) {
         _respondedEvents.remove(targetEvent);
       }
     }
@@ -66,5 +66,21 @@ class MockLocalData extends IlocalData {
   @override
   Future<List<Event>> getRespondedEvents() {
     return Future.value(_respondedEvents);
+  }
+
+  @override
+  bool deleteCreatorEvent(String link) {
+    for (int i = 0; i < _createdEvents.length; i++) {
+      var targetEvent = _createdEvents[i];
+      if (targetEvent.link == link) {
+        _createdEvents.remove(targetEvent);
+      }
+    }
+    return saveCreatorEvents();
+  }
+
+  @override
+  bool saveCreatorEvents() {
+    return true;
   }
 }
