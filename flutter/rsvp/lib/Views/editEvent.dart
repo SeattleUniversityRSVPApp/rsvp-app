@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/CreateEventViewModel.dart';
+import 'package:rsvp/ViewModels/EventDetailsViewModel.dart';
+import 'package:rsvp/ViewModels/EventViewModel.dart';
 
-class CreateEvent extends StatefulWidget {
+class EditEvent extends StatefulWidget {
+  final EventViewModel event;
+
+  const EditEvent({Key key, this.event}) : super(key: key);
   @override
-  _CreateEventState createState() => _CreateEventState();
+  EditEventState createState() => EditEventState();
 }
 
-class _CreateEventState extends State<CreateEvent> {
+class EditEventState extends State<EditEvent> {
+  EventDetailsViewModel _eventDetailsViewModel;
   CreateEventViewModel _createEventViewModel;
   String _eventName;
   String _creatorName;
@@ -21,7 +27,7 @@ class _CreateEventState extends State<CreateEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create an Event'),
+        title: Text('Edit Event'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -35,15 +41,15 @@ class _CreateEventState extends State<CreateEvent> {
               getEventDescription(),
               getEventLocation(),
               RaisedButton(
-                  child: Text('Add Event'),
+                  child: Text('Update Event'),
                   onPressed: () => {
-                        _createEventViewModel.createEvent(
-                            _eventName,
-                            _creatorName,
-                            _eventDate.substring(0, _eventDate.length - 1),
-                            _minNum,
-                            _eventDescription,
-                            _eventLocation),
+//                        _eventDetailsViewModel.editEvent(
+//                            _eventName,
+//                            _creatorName,
+//                            _eventDate.substring(0, _eventDate.length - 1),
+//                            _minNum,
+//                            _eventDescription,
+//                            _eventLocation),
                         Navigator.pop(context),
                       })
             ],
