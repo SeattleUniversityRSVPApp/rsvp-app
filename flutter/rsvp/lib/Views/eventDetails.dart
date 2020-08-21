@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/EventDetailsViewModel.dart';
 import 'package:rsvp/ViewModels/EventViewModel.dart';
+import 'package:rsvp/Views/editEvent.dart';
 
 class EventDetails extends StatefulWidget {
   final EventViewModel event;
@@ -186,7 +187,11 @@ class _EventDetailsState extends State<EventDetails> {
               alignment: Alignment.bottomLeft,
               child: FlatButton.icon(
                 onPressed: () async {
-//                  await delete();
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditEvent(),
+                      ));
                 },
                 icon: Icon(
                   Icons.create,

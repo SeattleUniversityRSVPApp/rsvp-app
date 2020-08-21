@@ -12,8 +12,8 @@ class EventDetailsViewModel extends ChangeNotifier {
   }
 
   bool editEvent(String link, DateTime date, String location) {
-    var editdEvent = _repositoryObj.editEvent(link, date, location);
-    if (editdEvent == null) {
+    var editedEvent = _repositoryObj.editEvent(link, date, location);
+    if (editedEvent == null) {
       return false;
     } else {
       return true;
