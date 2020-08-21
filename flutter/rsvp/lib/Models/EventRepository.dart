@@ -15,10 +15,10 @@ class EventRepository implements IEventRepository {
   EventRepository(this._eventWebService, this._localDataObj);
 
   @override
-  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
-      String eventDescription, String eventLocation) {
-    var aNewEvent = _eventWebService.createEvent(
-        eventName, creatorName, eventDate, minNum, eventDescription, eventLocation);
+  Event createEvent(String eventName, String creatorName, DateTime eventDate,
+      int minNum, String eventDescription, String eventLocation) {
+    var aNewEvent = _eventWebService.createEvent(eventName, creatorName,
+        eventDate, minNum, eventDescription, eventLocation);
     if (aNewEvent != null) {
       _localDataObj.addCreatedEvents(aNewEvent);
 
@@ -46,13 +46,23 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  Event cancelEvent(String link) {
-    return null;
+  bool cancelEvent(String link) {
+    if (_eventWebService.cancelEvent(link)) {
+      if (_cachedEvents.containsKey(link)) {
+        _cachedEvents.remove(link);
+      }
+      bool isSuccessful = _localDataObj.deleteCreatorEvent(link);
+      for (var listener in _myEventsListeners) {
+        listener.call();
+      }
+      return isSuccessful;
+    }
+    return false;
   }
 
   @override
   bool deleteEvent(String link) {
-    if(_cachedEvents.containsKey(link)) {
+    if (_cachedEvents.containsKey(link)) {
       _cachedEvents.remove(link);
     }
     bool isSuccessful = _localDataObj.deleteRespondentEvent(link);
