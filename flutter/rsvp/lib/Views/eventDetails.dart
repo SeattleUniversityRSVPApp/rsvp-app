@@ -202,6 +202,7 @@ class _EventDetailsState extends State<EventDetails> {
               child: FlatButton.icon(
                 onPressed: () async {
                   await _eventDetailsViewModel.cancelEvent(widget.event.link);
+                  Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.cancel,

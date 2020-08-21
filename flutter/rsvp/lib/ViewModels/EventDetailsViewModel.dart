@@ -6,12 +6,9 @@ class EventDetailsViewModel extends ChangeNotifier {
   EventDetailsViewModel(this._repositoryObj);
 
   bool cancelEvent(String link) {
-    var canceledEvent = _repositoryObj.cancelEvent(link);
-    if (canceledEvent == null) {
-      return false;
-    } else {
-      return true;
-    }
+    _repositoryObj.cancelEvent(link);
+    _repositoryObj.addMyEventsListener(() => notifyListeners());
+    return true;
   }
 
   bool editEvent(String link, DateTime date, String location) {
@@ -28,5 +25,4 @@ class EventDetailsViewModel extends ChangeNotifier {
     _repositoryObj.addMyEventsListener(() => notifyListeners());
     return true;
   }
-
 }

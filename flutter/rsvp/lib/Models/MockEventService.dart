@@ -25,8 +25,8 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
-      String eventDescription, String eventLocation) {
+  Event createEvent(String eventName, String creatorName, DateTime eventDate,
+      int minNum, String eventDescription, String eventLocation) {
     var newEvent = Event(
         FakeData.urlTemplate + (FakeData.eventIdCounter++).toString(),
         eventName,
@@ -52,9 +52,17 @@ class MockEventService implements IEventWebService {
   }
 
   @override
+  bool cancelEvent(String link) {
+    if (_mockEventTable.containsKey(link)) {
+      _mockEventTable.remove(link);
+      return true;
+    }
+    return true;
+  }
+
+  @override
   bool joinEvent(String link, String name) {
     var newRespondent = _mockRespondentTable[link] = name;
     return true;
   }
-
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'event.dart';
 
 abstract class IEventRepository {
-  Event createEvent(String eventName, String creatorName, DateTime eventDate, int minNum,
-      String eventDescription, String eventLocation);
+  Event createEvent(String eventName, String creatorName, DateTime eventDate,
+      int minNum, String eventDescription, String eventLocation);
 
   bool editEvent(String link, DateTime date, String location);
 
@@ -13,7 +13,7 @@ abstract class IEventRepository {
 
   Future<List<Event>> getRespondentEvents();
 
-  Event cancelEvent(String link);
+  bool cancelEvent(String link);
 
   bool deleteEvent(String link);
 

@@ -65,9 +65,7 @@ class LocalData implements IlocalData {
       var stringJsonFormat = await jsonhandler.readRespondedEvents();
       var userMap = jsonDecode(stringJsonFormat) as List;
       respondedEventsList = _convertDynamicListToEventList(userMap);
-    }
-    catch(exception)
-    {
+    } catch (exception) {
       // If the file doesn't exist, there aren't any respondedEvents. So, return an empty list.
       print("Responded file: Couldn't read this file");
     }
@@ -76,9 +74,9 @@ class LocalData implements IlocalData {
 
   @override
   bool deleteRespondentEvent(String link) {
-    for(int i = 0; i < respondedEventsList.length; i++) {
+    for (int i = 0; i < respondedEventsList.length; i++) {
       var targetEvent = respondedEventsList[i];
-      if(targetEvent.link == link) {
+      if (targetEvent.link == link) {
         respondedEventsList.remove(respondedEventsList[i]);
       }
     }
@@ -92,7 +90,31 @@ class LocalData implements IlocalData {
       print(stringJsonFormat);
       jsonhandler.saveRespondedEvents(stringJsonFormat);
       return true;
-    } catch(exception) {
+    } catch (exception) {
+      print("Responded file: Couldn't update this file");
+      return false;
+    }
+  }
+
+  @override
+  bool deleteCreatorEvent(String link) {
+    for (int i = 0; i < createdEventsList.length; i++) {
+      var targetEvent = createdEventsList[i];
+      if (targetEvent.link == link) {
+        createdEventsList.remove(createdEventsList[i]);
+      }
+    }
+    return saveCreatorEvents();
+  }
+
+  @override
+  bool saveCreatorEvents() {
+    try {
+      String stringJsonFormat = jsonEncode(createdEventsList);
+      print(stringJsonFormat);
+      jsonhandler.saveCreatedEvents(stringJsonFormat);
+      return true;
+    } catch (exception) {
       print("Responded file: Couldn't update this file");
       return false;
     }
@@ -102,8 +124,7 @@ class LocalData implements IlocalData {
   bool changeDefaultName(String name) {
     try {
       jsonhandler.saveUserName(name);
-    }
-    catch (exception){
+    } catch (exception) {
       print('Could not save user name in file.');
       return false;
     }
@@ -113,11 +134,9 @@ class LocalData implements IlocalData {
 
   @override
   Future<String> getDefaultName() async {
-    try{
+    try {
       _defaultName = await jsonhandler.readUserName();
-    }
-    catch (exception)
-    {
+    } catch (exception) {
       print('Could not read user name from file');
       print(exception.toString());
     }
