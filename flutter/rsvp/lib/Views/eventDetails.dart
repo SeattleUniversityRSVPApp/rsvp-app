@@ -190,8 +190,9 @@ class _EventDetailsState extends State<EventDetails> {
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditEvent(),
-                      ));
+                          builder: (context) => EditEvent(
+                                event: widget.event,
+                              )));
                 },
                 icon: Icon(
                   Icons.create,
