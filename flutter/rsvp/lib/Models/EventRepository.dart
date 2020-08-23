@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rsvp/Models/IEventRepository.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
 import 'package:rsvp/Models/ILocalData.dart';
+
 import 'event.dart';
 
 class EventRepository implements IEventRepository {
@@ -34,15 +35,11 @@ class EventRepository implements IEventRepository {
 
   @override
   Event joinEvent(String link, String respondentName) {
-    var event = getEvent(link);
-
-    if (event == null) {
-      return null;
-    }
-
-    _eventWebService.joinEvent(link, respondentName);
-
-    return event;
+    //var event = getEvent(link);
+    //_eventWebService.joinEvent(link, respondentName);
+    //return event;
+    // TODO: implement this function.
+    return null;
   }
 
   @override
@@ -85,13 +82,13 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  Event getEvent(String link) {
+  Future<Event> getEvent(String link) async {
     // If this event is cached, then use that and don't send a request to the service.
     if (_cachedEvents.containsKey(link)) {
       return _cachedEvents[link];
     }
     //else ask service and update the cache in the memory
-    var retrievedEvent = _eventWebService.getEvent(link);
+    var retrievedEvent = await _eventWebService.getEvent(link);
     _cachedEvents[link] = retrievedEvent;
     return retrievedEvent;
   }

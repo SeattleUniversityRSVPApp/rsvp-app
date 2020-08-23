@@ -1,5 +1,6 @@
 import 'package:rsvp/Models/FakeData.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
+
 import 'event.dart';
 
 class MockEventService implements IEventWebService {
@@ -42,8 +43,8 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  Event getEvent(String link) {
-    return _mockEventTable[link];
+  Future<Event> getEvent(String link) {
+    return Future.value(_mockEventTable[link]);
   }
 
   @override
