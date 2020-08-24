@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rsvp/ViewModels/JoinEventViewModel.dart';
 
+import 'eventDetails.dart';
+
 class JoinEvent extends StatefulWidget {
   @override
   _JoinEventState createState() => _JoinEventState();
@@ -14,7 +16,7 @@ class _JoinEventState extends State<JoinEvent> {
 
   @override
   Widget build(BuildContext context) {
-    bool joined;
+    bool joined, foundEvent;
     return Scaffold(
       appBar: AppBar(
         title: Text('Find and Join an Event'),
@@ -36,15 +38,26 @@ class _JoinEventState extends State<JoinEvent> {
                     RaisedButton(
                         child: Text('View Event'),
                         onPressed: () async => {
-                              // Go to view event page here?
-                              Navigator.pop(context),
-                            }),
+                          foundEvent = _joinEventViewModel.getEventExist(_eventLink),
+                          if(foundEvent) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        EventDetails(
+                                          event: _joinEventViewModel.getEvent(
+                                              _eventLink),
+                                        ))),
+                          } else {
+                            showAlertDialog(context, foundEvent, true),
+                          }
+                        }),
                     RaisedButton(
                         child: Text('Join Event'),
                         onPressed: () => {
                               joined =
                                   _joinEventViewModel.joinEvent(_eventLink, _userName),
-                              showAlertDialog(context, joined),
+                              showAlertDialog(context, joined, false),
                             }),
                   ],
                 ),
@@ -122,18 +135,23 @@ class _JoinEventState extends State<JoinEvent> {
   }
 }
 
-showAlertDialog(BuildContext context, bool joined) {
+showAlertDialog(BuildContext context, bool success, bool view) {
   Text title;
   Text message;
-
-  if (joined) {
-    title = Text('Success');
-    message = Text('Event Successfully Joined.');
+  if(!view) {
+    if (success) {
+      title = Text('Success');
+      message = Text('Event Successfully Joined.');
+    } else {
+      title = Text('Error');
+      message = Text('Failed to join event. Please try again.');
+    }
   } else {
-    title = Text('Error');
-    message = Text('Failed to join event. Please try again.');
+    if (!success) {
+      title = Text('Error');
+      message = Text('Failed to find the event. Please try again.');
+    }
   }
-
   // set up the button
   Widget okButton = FlatButton(
     child: Text('OK'),
