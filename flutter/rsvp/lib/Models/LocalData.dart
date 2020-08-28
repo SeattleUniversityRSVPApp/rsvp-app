@@ -55,7 +55,7 @@ class LocalData implements IlocalData {
     respondedEventsList.add(newEvent);
     String stringJsonFormat = jsonEncode(respondedEventsList);
     print(stringJsonFormat);
-    jsonhandler.saveCreatedEvents(stringJsonFormat);
+    jsonhandler.saveRespondedEvents(stringJsonFormat);
     return null;
   }
 

@@ -1,3 +1,5 @@
+import 'Response.dart';
+
 class Event {
   String _link;
   String _name;
@@ -7,8 +9,9 @@ class Event {
   String _location;
   int _minNum;
   bool _status;
+  List<Response> _allResponses;
 
-  Map toJson() => {
+  Map toJson() => { // TODO: Add _allResponse
     'link': _link,
     'name': _name,
     'date': dateTime.toString(),
@@ -19,13 +22,13 @@ class Event {
     'status': status.toString(),
   };
 
-  factory Event.fromJson(dynamic json) {
+  factory Event.fromJson(dynamic json) { // TODO: Add _allResponse
     return Event(json['link'] as String, json['name'] as String, json['creator'] as String,
         json['description'] as String, DateTime.parse(json['date'] as String),
         json['location'] as String, json['minNum'] as int, json['status'] as bool);
   }
 
-  Event(
+  Event( // TODO: Add _allResponse
       String link,
       String name,
       String creator,
@@ -42,6 +45,7 @@ class Event {
     _location = location;
     _minNum = minNum;
     _status = status;
+    _allResponses = [];
   }
 
   String get link => _link;
@@ -59,6 +63,16 @@ class Event {
   bool get status => _status;
 
   String get description => _description;
+
+  List<Response> get allResponses => _allResponses;
+
+  void addNewResponse(Response response) {
+    _allResponses.add(response);
+  }
+
+//  set allResponses(List<Response> value) {
+//    _allResponses = value;
+//  }
 
   set description(String value) {
     _description = value;

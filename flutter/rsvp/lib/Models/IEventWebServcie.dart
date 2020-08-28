@@ -1,3 +1,4 @@
+import 'Response.dart';
 import 'event.dart';
 
 abstract class IEventWebService {
@@ -8,7 +9,7 @@ abstract class IEventWebService {
 
   Event getEvent(String link);
 
-  bool joinEvent(String link, String name);
+  Response joinEvent(String link, String name);
 
   bool cancelEvent(String link);
 }
