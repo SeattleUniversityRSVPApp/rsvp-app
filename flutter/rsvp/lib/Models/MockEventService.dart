@@ -1,5 +1,6 @@
 import 'package:rsvp/Models/FakeData.dart';
 import 'package:rsvp/Models/IEventWebServcie.dart';
+import 'Response.dart';
 import 'event.dart';
 
 class MockEventService implements IEventWebService {
@@ -7,7 +8,7 @@ class MockEventService implements IEventWebService {
       MockEventService._internal();
 
   final Map<String, Event> _mockEventTable = <String, Event>{};
-  final Map<String, String> _mockRespondentTable = <String, String>{};
+  final Map<int, Response> _mockResponseTable = <int, Response>{};
 
   factory MockEventService() {
     return _webServiceSingleton;
@@ -22,6 +23,9 @@ class MockEventService implements IEventWebService {
     _mockEventTable[FakeData.fakeEventData[3].link] = FakeData.fakeEventData[3];
     _mockEventTable[FakeData.fakeEventData[4].link] = FakeData.fakeEventData[4];
     _mockEventTable[FakeData.fakeEventData[5].link] = FakeData.fakeEventData[5];
+    _mockResponseTable[FakeData.fakeResponseData[0].id] = FakeData.fakeResponseData[0];
+    _mockResponseTable[FakeData.fakeResponseData[1].id] = FakeData.fakeResponseData[1];
+    _mockResponseTable[FakeData.fakeResponseData[2].id] = FakeData.fakeResponseData[2];
   }
 
   @override
@@ -61,8 +65,9 @@ class MockEventService implements IEventWebService {
   }
 
   @override
-  bool joinEvent(String link, String name) {
-    var newRespondent = _mockRespondentTable[link] = name;
-    return true;
+  Response joinEvent(String link, String name) {
+    var newResponse = Response(link, FakeData.responseIdCounter, name, true);
+    _mockResponseTable[FakeData.responseIdCounter++] = newResponse;
+    return newResponse;
   }
 }

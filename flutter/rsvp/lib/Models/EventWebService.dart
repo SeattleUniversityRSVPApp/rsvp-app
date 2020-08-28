@@ -1,6 +1,8 @@
 import 'package:rsvp/Models/IEventWebServcie.dart';
 import 'package:rsvp/Models/event.dart';
 
+import 'Response.dart';
+
 class EventWebService implements IEventWebService {
   @override
   Event createEvent(String eventName, String creatorName, DateTime eventDate,
@@ -21,9 +23,9 @@ class EventWebService implements IEventWebService {
   }
 
   @override
-  bool joinEvent(String link, String name) {
+  Response joinEvent(String link, String name) {
     // TODO: implement joinEvent
-    return false;
+    return null;
   }
 
   @override

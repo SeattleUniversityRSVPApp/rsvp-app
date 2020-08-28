@@ -1,8 +1,19 @@
 class Response {
   String _eventLink;
-  String _id;
+  int _id;
   String _respondentName;
   bool _attending;
+
+  Response(
+      String eventLink,
+      int id,
+      String respondentName,
+      bool attending) {
+    _eventLink = eventLink;
+    _id = id;
+    _respondentName = respondentName;
+    _attending = attending;
+  }
 
 
   String get eventLink => _eventLink;
@@ -12,9 +23,9 @@ class Response {
   }
 
 
-  String get id => _id;
+  int get id => _id;
 
-  set id(String id) {
+  set id(int id) {
     _id = id;
   }
 

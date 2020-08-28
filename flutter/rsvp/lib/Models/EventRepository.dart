@@ -40,7 +40,9 @@ class EventRepository implements IEventRepository {
       return null;
     }
 
-    _eventWebService.joinEvent(link, respondentName);
+    var newResponse = _eventWebService.joinEvent(link, respondentName);
+    event.addNewResponse(newResponse);
+    _localDataObj.addRespondedEvent(event);
 
     return event;
   }
