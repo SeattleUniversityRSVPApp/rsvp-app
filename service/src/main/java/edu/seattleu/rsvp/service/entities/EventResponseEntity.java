@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import edu.seattleu.rsvp.service.dtos.Response;
 
 @Entity
-@Table(name = "response_table")
-public class ResponseEntity implements Serializable
+@Table(name = "responseTBL")
+public class EventResponseEntity implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,11 +25,11 @@ public class ResponseEntity implements Serializable
     private boolean attending;
 
 
-    public ResponseEntity()
+    public EventResponseEntity()
     {
     }
 
-    public static ResponseEntity createFromDto(Response responseDto)
+    public static EventResponseEntity createFromDto(Response responseDto)
     {
         return null;
     }

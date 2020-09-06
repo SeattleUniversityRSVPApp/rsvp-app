@@ -5,10 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import edu.seattleu.rsvp.service.entities.ResponseEntity;
+import edu.seattleu.rsvp.service.entities.EventResponseEntity;
 
 @Transactional
-public interface ResponseRepository extends JpaRepository<ResponseEntity, Long>
+public interface ResponseRepository extends JpaRepository<EventResponseEntity, Long>
 {
-    public List<ResponseEntity> getResponseEntitiesByEvent_link(String EventLink);
+//    public List<EventResponseEntity> getResponseEntitiesByEvent_link(String EventLink);
 }

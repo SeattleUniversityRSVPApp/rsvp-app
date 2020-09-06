@@ -1,7 +1,7 @@
 package edu.seattleu.rsvp.service.dtos;
 
 import java.io.Serializable;
-import edu.seattleu.rsvp.service.entities.ResponseEntity;
+import edu.seattleu.rsvp.service.entities.EventResponseEntity;
 
 public class Response implements Serializable
 {
@@ -22,7 +22,7 @@ public class Response implements Serializable
         this.attending = attending;
     }
 
-    public static Response createFromEntity(ResponseEntity responseEntity)
+    public static Response createFromEntity(EventResponseEntity responseEntity)
     {
         return null;
     }
