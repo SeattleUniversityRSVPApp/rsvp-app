@@ -8,6 +8,7 @@ class EventWebService implements IEventWebService {
   Event createEvent(String eventName, String creatorName, DateTime eventDate,
       int minNum, String eventDescription, String eventLocation){
     // TODO: implement createEvent
+
     return null;
   }
 
